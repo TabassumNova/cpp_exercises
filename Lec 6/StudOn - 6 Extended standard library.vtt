@@ -1,0 +1,934 @@
+WEBVTT
+
+00:01.330 --> 00:08.322
+[Music]
+
+00:10.419 --> 00:15.421
+In this part we will talk about the standard library.
+
+00:15.422 --> 00:17.871
+So the standard C++ library
+
+00:17.872 --> 00:19.892
+is a collection of functions,
+
+00:19.893 --> 00:24.031
+constants, classes, objects and templates,
+
+00:24.032 --> 00:27.505
+that extends the C++ language.
+
+00:27.506 --> 00:29.840
+It has a lot of parts.
+
+00:29.841 --> 00:35.190
+So very common ones are the input/output stream library,
+
+00:35.191 --> 00:36.880
+that you have used.
+
+00:36.881 --> 00:39.980
+That contains for example "cin", "cout".
+
+00:39.981 --> 00:42.677
+The standard template library,
+
+00:42.678 --> 00:46.804
+that contains a lot of data types,
+
+00:46.805 --> 00:53.350
+like the map- and the vector container and all the others
+
+00:53.351 --> 00:55.607
+And then there is the whole C library
+
+00:55.608 --> 00:58.058
+and then there are other libraries like string,
+
+00:58.059 --> 01:01.656
+new, limits and exception.
+
+01:01.657 --> 01:05.000
+In this course we will pick out
+
+01:05.001 --> 01:12.989
+some of these library functions, constants, classes and so on
+
+01:12.990 --> 01:18.463
+and discuss them in a little bit more detail.
+
+01:18.464 --> 01:21.095
+I start with the sequential containers,
+
+01:21.096 --> 01:23.259
+because they are very important.
+
+01:23.260 --> 01:25.972
+So this should be also a repetition.
+
+01:25.973 --> 01:27.566
+So, what is a container?
+
+01:27.567 --> 01:30.180
+A container is a type, that holds a collection
+
+01:30.181 --> 01:34.473
+of objects.
+
+01:34.474 --> 01:36.128
+In the C++ library
+
+01:36.129 --> 01:39.044
+each container type is a template
+
+01:39.045 --> 01:43.405
+and in order to define a container,
+
+01:43.406 --> 01:46.327
+we must specify the type of the elements,
+
+01:46.328 --> 01:48.905
+that you want to store in the container.
+
+01:48.906 --> 01:55.403
+So classical example: a list, that contains integers.
+
+01:55.404 --> 02:00.233
+These library containers are mostly variable sized.
+
+02:00.234 --> 02:06.482
+So you can define a vector of double, for example,
+
+02:06.483 --> 02:10.219
+and then later on you can add elements
+
+02:10.220 --> 02:14.331
+and let it grow.
+
+02:14.332 --> 02:17.687
+Now a sequential container is basically a type,
+
+02:17.688 --> 02:20.838
+that holds an ordered collection of objects
+
+02:20.839 --> 02:23.240
+of a single type.
+
+02:23.241 --> 02:25.760
+So you can access the elements
+
+02:25.761 --> 02:30.231
+in a sequential container by position.
+
+02:30.232 --> 02:36.304
+The example that I choose here is the vector
+
+02:36.305 --> 02:40.534
+flexible sized array as said.
+
+02:40.535 --> 02:44.359
+Here you can use the positional index,
+
+02:44.360 --> 02:47.117
+in order to access the element
+
+02:47.118 --> 02:52.594
+and you can also add elements by built-in functions
+
+02:52.595 --> 02:56.466
+for example push back or insert.
+
+02:56.467 --> 02:59.289
+If you add elements to a vector,
+
+02:59.290 --> 03:06.128
+then it can happen that the memory is reallocated.
+
+03:06.129 --> 03:10.251
+That means also that you invalidate all iterators,
+
+03:10.252 --> 03:15.076
+that work on this vector.
+
+03:15.077 --> 03:18.810
+If you add or remove an element in the middle of a vector,
+
+03:18.811 --> 03:21.375
+then you also invalidate all iterators
+
+03:21.376 --> 03:26.569
+to the elements after the insertion point.
+
+03:26.570 --> 03:32.073
+So using a vector for data,
+
+03:32.074 --> 03:37.348
+that you want to add flexibly
+
+03:37.349 --> 03:42.340
+elements or delete elements at an arbitrary position,
+
+03:42.341 --> 03:44.524
+is not very efficient.
+
+03:44.525 --> 03:49.523
+So typically a vector has fast access,
+
+03:49.524 --> 03:53.886
+but slow addition and deletion of elements
+
+03:53.887 --> 03:59.595
+at arbitrary positions.
+
+03:59.596 --> 04:03.287
+One operation I want to stress here
+
+04:03.288 --> 04:11.085
+is the "emplace_back" or "emplace_front".
+
+04:11.086 --> 04:13.460
+What you want to do here is,
+
+04:13.461 --> 04:22.868
+you want to construct a new element in a position,
+
+04:22.869 --> 04:28.607
+where you have beforehand allocated the memory.
+
+04:28.608 --> 04:36.183
+So this is closely related to the allocator class.
+
+04:36.184 --> 04:39.828
+In this case if you use "emplace_back",
+
+04:39.829 --> 04:42.763
+then the new element is constructed directly
+
+04:42.764 --> 04:49.680
+in this space, that is managed by the container.
+
+04:49.681 --> 04:54.278
+A classical function is "push_back".
+
+04:54.279 --> 04:59.525
+for appending elements
+
+04:59.526 --> 05:03.788
+at the back of a vector.
+
+05:03.789 --> 05:06.733
+Now when you work with an iterator,
+
+05:06.734 --> 05:11.540
+then you should always stick
+
+05:11.541 --> 05:19.495
+to the intended semantics, of course.
+
+05:19.496 --> 05:26.942
+You should for example prefer "!="
+
+05:26.943 --> 05:31.263
+and not ">", if you have loops,
+
+05:31.264 --> 05:36.439
+especially with vector.
+
+05:36.440 --> 05:42.102
+Many people try to use "<" in a for loop,
+
+05:42.103 --> 05:45.616
+but of course this is not general,
+
+05:45.617 --> 05:50.651
+because other containers they do not offer a "<",
+
+05:50.652 --> 05:53.861
+if they are not an ordered collection.
+
+05:53.862 --> 06:00.734
+So you should prefer "!=".
+
+06:00.735 --> 06:03.483
+And of course when you use iterators,
+
+06:03.484 --> 06:05.486
+then you should have in mind,
+
+06:05.487 --> 06:08.923
+that if you change the size of a vector,
+
+06:08.924 --> 06:16.711
+then you also invalidate the existing iterators.
+
+06:16.712 --> 06:19.292
+There are different kinds of iterators.
+
+06:19.293 --> 06:23.360
+So you have for example a constant iterator
+
+06:23.361 --> 06:28.795
+and you have also const iterator.
+
+06:28.796 --> 06:34.168
+The difference is the first is an iterator,
+
+06:34.169 --> 06:39.517
+that is constant and second is an iterator,
+
+06:39.518 --> 06:44.673
+that does not allow you to change values
+
+06:44.674 --> 06:54.465
+of the elements you get back from the iterator.
+
+06:54.466 --> 06:59.219
+Now if you work with a vector,
+
+06:59.220 --> 07:03.209
+then you have to know that the size of the vector
+
+07:03.210 --> 07:06.125
+is the number of elements in it.
+
+07:06.126 --> 07:10.555
+And in addition to that you have also the capacity.
+
+07:10.556 --> 07:14.146
+So the capacity of a vector tells you,
+
+07:14.147 --> 07:18.063
+how many elements it could hold,
+
+07:18.064 --> 07:24.052
+before you have to reallocate memory,
+
+07:24.053 --> 07:28.547
+in order to add more elements.
+
+07:28.548 --> 07:34.670
+Internally it is implementation-dependent,
+
+07:34.671 --> 07:39.148
+how this allocation strategy is done.
+
+07:39.149 --> 07:43.476
+So the only requirements are,
+
+07:43.477 --> 07:48.533
+that the reserve and the capacity functions are provided.
+
+07:48.430 --> 07:50.261
+Now, if you work with containers,
+
+07:50.262 --> 07:54.763
+then of course in the design phase of your software,
+
+07:54.764 --> 07:59.921
+you have to decide which one you want to use.
+
+07:59.922 --> 08:07.241
+Since there are a number of containers available
+
+08:07.242 --> 08:09.628
+you should first of all check,
+
+08:09.629 --> 08:15.132
+if you want to access your elements randomly,
+
+08:15.133 --> 08:20.696
+or one after the other in a certain order.
+
+08:20.697 --> 08:23.267
+And then second you should check,
+
+08:23.268 --> 08:27.586
+if you want to add or remove elements
+
+08:27.587 --> 08:31.917
+and if so, if you want to add or remove elements
+
+08:31.918 --> 08:35.039
+only at the beginning at the end,
+
+08:35.040 --> 08:39.252
+or also at random positions.
+
+08:39.253 --> 08:44.106
+And depending on this, you should then choose
+
+08:44.107 --> 08:51.309
+the most efficient container for that case.
+
+08:51.310 --> 09:01.608
+If you have a situation where this changes during runtime.
+
+09:01.609 --> 09:06.340
+So let's say you have a certain strategy at the beginning,
+
+09:06.341 --> 09:10.661
+where you add arbitrary elements
+
+09:10.662 --> 09:14.357
+at arbitrary positions to your container,
+
+09:14.358 --> 09:18.074
+but once you have your elements,
+
+09:18.075 --> 09:25.573
+then you only want to access it arbitrarily
+
+09:25.574 --> 09:29.665
+and not always go through all elements,
+
+09:29.666 --> 09:31.189
+so you have a position then,
+
+09:31.190 --> 09:36.110
+then it could also be useful,
+
+09:36.111 --> 09:40.855
+first to use a list, build up the list
+
+09:40.856 --> 09:44.586
+and then to copy the list into a vector,
+
+09:44.587 --> 09:50.891
+where you can access randomly very efficient.
+
+09:50.875 --> 09:56.478
+The next part discusses briefly the generic algorithms.
+
+09:56.479 --> 09:58.412
+So what are generic algorithms?
+
+09:58.413 --> 10:03.221
+They are basically type dependent algorithms.
+
+10:03.222 --> 10:07.458
+The requirements: Basically, we need a way
+
+10:07.459 --> 10:12.258
+to traverse the collection.
+
+10:12.259 --> 10:18.431
+This is realized by iterators.
+
+10:18.432 --> 10:19.784
+We need to be able to know,
+
+10:19.785 --> 10:22.878
+when we have reached the end of the collection.
+
+10:22.879 --> 10:29.925
+Also realized via "end", so also iterators.
+
+10:29.926 --> 10:32.748
+And we need to be able to compare
+
+10:32.749 --> 10:35.785
+each element to the value we want.
+
+10:35.786 --> 10:39.432
+This requirement is put on the element type.
+
+10:39.433 --> 10:43.959
+So the element type has to overload
+
+10:43.960 --> 10:47.005
+the comparison operator,
+
+10:47.006 --> 10:50.773
+in order to work the generic algorithms
+
+10:50.774 --> 10:53.534
+and we need a type, that can refer
+
+10:53.535 --> 10:57.151
+to an element's position within the container,
+
+10:57.152 --> 11:01.102
+or that can indicate, that the element was not found.
+
+11:01.103 --> 11:06.003
+So this is for example "npos".
+
+11:06.004 --> 11:08.096
+Classically generic algorithms
+
+11:08.097 --> 11:11.471
+never execute container operations,
+
+11:11.472 --> 11:15.935
+but they operate solely in terms of iterators
+
+11:15.936 --> 11:17.795
+and iterator operations,
+
+11:17.796 --> 11:21.882
+in order to be generic.
+
+11:21.883 --> 11:26.551
+And when you want to use a generic algorithm,
+
+11:26.552 --> 11:30.840
+at first you should look at the container,
+
+11:30.841 --> 11:38.080
+because for example for lists there are some operations
+
+11:38.081 --> 11:42.367
+provided directly by the container as member functions.
+
+11:42.368 --> 11:45.881
+And they are then a little bit faster,
+
+11:45.882 --> 11:48.362
+than the generic ones,
+
+11:48.363 --> 11:54.234
+because they are specialized for the list.
+
+11:54.235 --> 11:58.122
+As an example let's say we want to eliminate
+
+11:58.123 --> 12:00.852
+duplicates in a vector of strings
+
+12:00.853 --> 12:03.191
+that is called "words".
+
+12:03.192 --> 12:06.808
+So how can you do that using generic algorithms?
+
+12:06.809 --> 12:11.120
+In step one you use the sort,
+
+12:11.121 --> 12:13.766
+here you provide an iterator range,
+
+12:13.767 --> 12:16.712
+"words.begin()" "words.end()".
+
+12:16.713 --> 12:25.016
+This results now in a sorted "words" vector.
+
+12:25.017 --> 12:28.731
+And in step two you reorder the "words",
+
+12:28.732 --> 12:31.509
+so that each word appears once
+
+12:31.510 --> 12:35.231
+in the front part of the "words" vector
+
+12:35.232 --> 12:39.995
+and you return an iterator, one past the unique element
+
+12:39.996 --> 12:44.258
+by the "unique" generic algorithm.
+
+12:44.259 --> 12:48.107
+You can store in a vector string iterator
+
+12:48.108 --> 12:50.221
+the result from unique.
+
+12:50.222 --> 12:53.520
+And "unique" again is called just with
+
+12:53.521 --> 13:00.184
+an iterator "words.begin()" "words.end()" interval.
+
+13:00.185 --> 13:07.176
+And in step three you can then call a member function
+
+13:07.177 --> 13:16.435
+from the vector that erases basically all duplicates.
+
+13:16.436 --> 13:21.334
+Note here algorithms never directly changed
+
+13:21.335 --> 13:23.363
+the size of a container.
+
+13:23.364 --> 13:28.047
+So that means if you want to add or remove elements,
+
+13:28.048 --> 13:35.638
+then you must use container operations.
+
+13:35.639 --> 13:40.686
+One very common task
+
+13:40.687 --> 13:43.574
+is to define predicates,
+
+13:43.575 --> 13:46.707
+when you work with generic algorithms.
+
+13:46.708 --> 13:52.358
+An example is: you want to "find_if",
+
+13:52.359 --> 13:57.186
+and the "if" is a predicate, for example,
+
+13:57.187 --> 14:00.297
+you want to find in a vector all elements,
+
+14:00.298 --> 14:04.194
+that are smaller than some number.
+
+14:04.195 --> 14:08.238
+Then you can you define a predicate, or a function,
+
+14:08.239 --> 14:11.898
+that says, okay, if it's smaller than the number,
+
+14:11.899 --> 14:20.790
+return "true" else return "false".
+
+14:20.791 --> 14:30.509
+Typically these predicates are taking one or two arguments.
+
+14:30.510 --> 14:35.542
+As a predicate you can then use different kinds
+
+14:35.543 --> 14:38.879
+of callable objects.
+
+14:38.880 --> 14:42.731
+In general in C++ you have several types
+
+14:42.732 --> 14:46.313
+of callable objects besides the standard functions
+
+14:46.314 --> 14:47.844
+and the pointer to functions,
+
+14:47.845 --> 14:51.303
+that somehow you should not use.
+
+14:51.304 --> 14:54.136
+They're quite complex to define
+
+14:54.137 --> 14:57.218
+and there are better ways, typically.
+
+14:57.219 --> 14:58.971
+There is now the lambda function.
+
+14:58.972 --> 15:04.744
+So this is a very elegant way to define
+
+15:04.745 --> 15:09.847
+a callable object especially for predicates.
+
+15:09.848 --> 15:12.694
+But also specific things,
+
+15:12.695 --> 15:16.544
+like if you use the bind function.
+
+15:16.545 --> 15:21.951
+objects created by that are also callable objects.
+
+15:21.952 --> 15:25.105
+And of course if you have a functors of a class,
+
+15:25.106 --> 15:27.301
+that overloads the call operator.
+
+15:27.302 --> 15:31.621
+This is also a callable object.
+
+15:31.622 --> 15:35.332
+So you can have in principle two callable objects,
+
+15:35.333 --> 15:37.616
+that have different types,
+
+15:37.617 --> 15:40.250
+but share the same call signature,
+
+15:40.251 --> 15:44.762
+so like a function and functor,
+
+15:44.763 --> 15:50.937
+they have the same call signature.
+
+15:50.938 --> 15:55.241
+In addition to that the standard library provides
+
+15:55.242 --> 16:00.442
+the function type within the functional header.
+
+16:00.443 --> 16:07.850
+And herein you can store any kind of callable object.
+
+16:07.851 --> 16:09.233
+So here you see the examples.
+
+16:09.234 --> 16:12.598
+Function takes a template parameter
+
+16:12.599 --> 16:14.693
+and in this template parameter
+
+16:14.694 --> 16:18.805
+you specify, e.g., the parameter list of the callable object.
+
+16:18.806 --> 16:23.123
+Two integers here. And also the return type
+
+16:23.124 --> 16:24.719
+of the callable object,
+
+16:24.720 --> 16:31.368
+that would be an integer.
+
+16:31.369 --> 16:37.204
+The next thing is again iterators.
+
+16:37.205 --> 16:41.908
+So there are several types of iterators,
+
+16:41.909 --> 16:46.123
+as you might already know.
+
+16:46.124 --> 16:50.388
+Here in this figure at the bottom of the page
+
+16:50.389 --> 16:52.828
+you see the classical iterator,
+
+16:52.829 --> 16:56.091
+where you have the "begin" and the "end".
+
+16:56.092 --> 17:00.378
+And then you have also the reverse iterators,
+
+17:00.379 --> 17:03.837
+that basically start at the last element
+
+17:03.838 --> 17:07.826
+and "r_end" is one before the first element.
+
+17:07.827 --> 17:11.842
+So this can be used to traverse
+
+17:11.843 --> 17:18.266
+your collection from the end to the beginning.
+
+17:18.267 --> 17:22.445
+And then there are additional iterators,
+
+17:22.446 --> 17:27.203
+that can not do so general things.
+
+17:27.204 --> 17:30.663
+One example is the insert iterator.
+
+17:30.664 --> 17:34.755
+This iterator uses a container operation
+
+17:34.756 --> 17:38.148
+to insert elements.
+
+17:38.149 --> 17:42.532
+And that's his only task basically.
+
+17:42.533 --> 17:45.547
+Whenever you use it,
+
+17:45.548 --> 17:52.260
+it will insert, like using push_back one element into a container.
+
+17:52.261 --> 17:59.168
+It could also print one element to a stream.
+
+17:59.181 --> 18:01.258
+And then I want to add
+
+18:01.259 --> 18:07.073
+some information about newer parts
+
+18:07.074 --> 18:08.734
+of the standard library.
+
+18:08.735 --> 18:14.530
+So the first thing I want to mention is the "tuple" type.
+
+18:14.531 --> 18:19.786
+"tuple" type is kind of a an extension to the "pair".
+
+18:19.787 --> 18:23.732
+"pair" can store two types
+
+18:23.733 --> 18:30.071
+and "tuple" can store an arbitrary number of types.
+
+18:30.072 --> 18:35.850
+Internally this is realized by a variadic template.
+
+18:35.851 --> 18:41.518
+This is sometimes useful.
+
+18:41.519 --> 18:45.579
+The next is regular expressions.
+
+18:45.580 --> 18:50.508
+Regular expressions are a way to
+
+18:50.509 --> 18:54.993
+describe a sequence of characters.
+
+18:54.994 --> 18:59.889
+You might know it from other languages
+
+18:59.890 --> 19:06.811
+like Perl, or Python, or many others.
+
+19:06.812 --> 19:09.245
+Regular expressions
+
+19:09.246 --> 19:17.906
+are for example used to find some parts in a text.
+
+19:17.907 --> 19:22.629
+You could via regular expressions
+
+19:22.630 --> 19:32.289
+easily extract, let's say all email addresses from a text.
+
+19:32.290 --> 19:35.740
+In the example you see here,
+
+19:35.741 --> 19:40.574
+how you define such a pattern or
+
+19:40.575 --> 19:43.350
+regular expression.
+
+19:43.351 --> 19:46.951
+In the coding examples later
+
+19:46.952 --> 19:51.868
+we will see a more complex example.
+
+19:51.869 --> 19:55.824
+Then you have the random numbers.
+
+19:55.825 --> 20:02.448
+Before C++11 you only had the "rand" function from C.
+
+20:02.449 --> 20:05.979
+This you should not use anymore,
+
+20:05.980 --> 20:09.199
+because it's not very flexible
+
+20:09.200 --> 20:16.203
+and also the random numbers are not very good
+
+20:16.204 --> 20:19.509
+in a statistical sense.
+
+20:19.510 --> 20:23.349
+Now the new random number library,
+
+20:23.350 --> 20:29.765
+allows you to define
+
+20:29.766 --> 20:37.191
+more complex random numbers and you also can control
+
+20:37.192 --> 20:41.645
+for example their distribution.
+
+20:41.646 --> 20:46.488
+This makes it now possible also to do
+
+20:46.489 --> 20:57.850
+serious statistical computations with this library.
+
+20:57.851 --> 21:02.203
+The last part of the library, I want to mention,
+
+21:02.204 --> 21:04.997
+is the chrono library.
+
+21:04.998 --> 21:09.422
+Here you get a flexible collection of types
+
+21:09.423 --> 21:12.069
+that track time,
+
+21:12.070 --> 21:15.604
+with varying degrees of precision.
+
+21:15.605 --> 21:19.811
+Inside the chrono library you have three main types.
+
+21:19.812 --> 21:22.958
+First you have clocks,
+
+21:22.959 --> 21:26.105
+then you have time points and then you have durations.
+
+21:26.106 --> 21:30.645
+These are the three concepts.
+
+21:30.646 --> 21:36.019
+In the example here you see you can define a start.
+
+21:36.020 --> 21:40.168
+This is from the chrono library the system clock "now()",
+
+21:40.169 --> 21:41.914
+so a specific clock.
+
+21:41.915 --> 21:46.071
+This is the current time, so to say,
+
+21:46.072 --> 21:51.977
+then we define a duration "elapsed_seconds".
+
+21:51.978 --> 22:01.092
+This you can just do by subtracting the two time points
+
+22:01.093 --> 22:04.092
+and then you have an "end_time",
+
+22:04.093 --> 22:09.689
+that you get by chrono system clock "to_time_t".
+
+22:09.690 --> 22:16.485
+So this is a quite convenient way,
+
+22:16.486 --> 22:23.201
+to use time in your programs
+
+22:23.202 --> 22:28.551
+and the especially nice thing is,
+
+22:28.552 --> 22:33.878
+that this works also on different operating systems
+
+22:33.879 --> 22:35.669
+in the same way.
+
+22:35.670 --> 22:39.674
+So this you should definitely use,
+
+22:39.675 --> 22:44.787
+if want to implement, e.g.,
+
+22:44.788 --> 22:48.319
+performance measurement or timing routines
+
+22:48.320 --> 22:50.708
+in your code.
+
+22:50.709 --> 22:56.231
+[Music]

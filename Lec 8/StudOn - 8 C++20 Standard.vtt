@@ -1,0 +1,760 @@
+WEBVTT
+
+00:01.311 --> 00:06.719
+[Music]
+
+00:06.720 --> 00:11.527
+Now I want to give you some outlook
+
+00:11.528 --> 00:17.611
+about the current state of the art in C++.
+
+00:17.612 --> 00:22.313
+So I want to show you some new features
+
+00:22.314 --> 00:27.465
+from the C++ 20 standard.
+
+00:27.466 --> 00:34.106
+So first a few words about C++ 20 standard in general.
+
+00:34.107 --> 00:40.193
+Currently I would not suggest to use it
+
+00:40.194 --> 00:43.798
+in all of your new codes,
+
+00:43.799 --> 00:51.123
+because not all compilers fully support it yet.
+
+00:51.124 --> 00:56.789
+Of course this will change in the next few months
+
+00:56.790 --> 01:00.455
+and then of course you can also use it
+
+01:00.456 --> 01:05.337
+for all of your projects.
+
+01:05.338 --> 01:10.115
+So what are the new C++ features,
+
+01:10.116 --> 01:16.275
+that are introduced in the C++ 20 standard.
+
+01:16.276 --> 01:20.666
+I just want to give you a brief overview.
+
+01:20.667 --> 01:25.691
+More details will be added later on,
+
+01:25.692 --> 01:31.482
+also in our course, when all the compilers are available
+
+01:31.483 --> 01:37.415
+and all the tests are fully functional.
+
+01:37.416 --> 01:43.913
+First of all co-routines were introduced.
+
+01:43.914 --> 01:48.445
+So they are for asynchronous programming.
+
+01:48.446 --> 01:56.489
+I will show an example of coroutines later on.
+
+01:56.490 --> 01:58.755
+Then there were contracts.
+
+01:58.756 --> 02:02.140
+Contracts. So this is a feature,
+
+02:02.141 --> 02:08.535
+that almost made it into the C++ 20 standard.
+
+02:08.536 --> 02:11.883
+But of course features change.
+
+02:11.884 --> 02:16.750
+So some features are dropped last minute,
+
+02:16.751 --> 02:19.510
+some features come in new.
+
+02:19.511 --> 02:22.365
+This is a dynamic process,
+
+02:22.366 --> 02:27.146
+but basically the contracts define interfaces for functions
+
+02:27.147 --> 02:31.300
+letting you define pre and post conditions.
+
+02:31.301 --> 02:36.637
+Currently I do not include them.
+
+02:36.638 --> 02:38.536
+Then we have the concepts.
+
+02:38.537 --> 02:42.985
+This is an extension for templates to define
+
+02:42.986 --> 02:46.506
+semantic categories for the allowed types.
+
+02:46.507 --> 02:54.416
+It's kind of a more powerful way to control,
+
+02:54.417 --> 02:58.558
+which types you want to use
+
+02:58.559 --> 03:04.821
+within your template parameters.
+
+03:04.822 --> 03:11.129
+And this really helps to do a better
+
+03:11.130 --> 03:17.805
+and also more robust programming with templates.
+
+03:17.806 --> 03:19.986
+Since this is a very advanced topic,
+
+03:19.987 --> 03:26.028
+I will also not include it here in the lecture.
+
+03:26.029 --> 03:30.117
+Then the ranges library was introduced,
+
+03:30.118 --> 03:34.987
+to apply the STL containers to algorithms.
+
+03:34.988 --> 03:44.025
+So this kind of extends iterators.
+
+03:44.026 --> 03:50.593
+So you can define "fuse" on, for example,
+
+03:50.594 --> 03:54.291
+parts of your vector.
+
+03:54.292 --> 04:00.898
+This is something that is very practical.
+
+04:00.899 --> 04:02.661
+And modules, this is the last thing.
+
+04:02.662 --> 04:07.616
+It is very important
+
+04:07.617 --> 04:17.007
+and a very fundamental change in C++ 20,
+
+04:17.008 --> 04:19.505
+because this provides you an alternative
+
+04:19.506 --> 04:22.544
+to the header and source files.
+
+04:22.545 --> 04:29.553
+This will influence all C++ programs and principles.
+
+04:29.554 --> 04:32.032
+Since all these features are new,
+
+04:32.033 --> 04:35.845
+as I have mentioned, only two of them
+
+04:35.846 --> 04:38.395
+I will now go into a little bit more detail.
+
+04:38.396 --> 04:43.327
+And these are coroutines and modules.
+
+04:43.328 --> 04:47.070
+So let's start with the modules.
+
+04:47.071 --> 04:51.042
+In my opinion this is really the most important
+
+04:51.043 --> 04:54.228
+new feature in the C++ 20 standard,
+
+04:54.229 --> 04:57.277
+because the modules are intended to overcome
+
+04:57.278 --> 05:00.067
+the restrictions of header files.
+
+05:00.068 --> 05:02.155
+So for example the separation of header
+
+05:02.156 --> 05:06.309
+and source files becomes obsolete.
+
+05:06.310 --> 05:08.322
+This is really cool,
+
+05:08.323 --> 05:13.713
+because it will provide you a compile time speed-up.
+
+05:13.714 --> 05:17.994
+A module is only imported once
+
+05:17.995 --> 05:22.994
+and then should be literally for free.
+
+05:22.995 --> 05:28.975
+In the standard C++ code you have,
+
+05:28.976 --> 05:32.382
+for example M header files and you include them
+
+05:32.383 --> 05:36.650
+in N  translation units and then of course
+
+05:36.651 --> 05:40.564
+you have to parse this header M times N times.
+
+05:40.565 --> 05:48.419
+So this is really very time consuming
+
+05:48.420 --> 05:51.709
+for a larger project.
+
+05:51.710 --> 05:56.235
+The second thing is you then have an isolation
+
+05:56.236 --> 05:58.984
+from the preprocessor macros.
+
+05:58.985 --> 06:02.481
+So of course you want to get rid of
+
+06:02.482 --> 06:05.198
+these preprocessor macros.
+
+06:05.199 --> 06:11.292
+It's only a text substitution and does exclude
+
+06:11.293 --> 06:13.462
+any C++ semantics.
+
+06:13.463 --> 06:19.607
+So it's very error-prone if you just do text substitution.
+
+06:19.608 --> 06:24.120
+There is no type checking for example.
+
+06:24.121 --> 06:27.459
+And this has also many negative consequences.
+
+06:27.460 --> 06:31.243
+For example it depends on
+
+06:31.244 --> 06:35.139
+in which sequence you include macros,
+
+06:35.140 --> 06:38.702
+or macros can clash with already defined macros,
+
+06:38.703 --> 06:41.300
+or names in your application.
+
+06:41.301 --> 06:46.202
+For the modules it makes no difference
+
+06:46.203 --> 06:48.655
+in which order you import them.
+
+06:48.656 --> 06:53.762
+This is really much better.
+
+06:53.763 --> 06:58.165
+Next thing is you get a possibility to express
+
+06:58.166 --> 07:00.887
+the logical structure of your code.
+
+07:00.888 --> 07:03.569
+The modules allow you to express
+
+07:03.570 --> 07:09.632
+which names should be exported or not explicitly.
+
+07:09.633 --> 07:13.117
+So you can for example bundle a few modules
+
+07:13.118 --> 07:14.830
+into a bigger module
+
+07:14.831 --> 07:20.951
+and then provide them to your customer as a logical package.
+
+07:20.952 --> 07:24.832
+You don't need any header files anymore.
+
+07:24.833 --> 07:27.872
+So there is no need to separate your files
+
+07:27.873 --> 07:30.822
+into an interface and an implementation part.
+
+07:30.823 --> 07:34.001
+This is handled by the modules.
+
+07:34.002 --> 07:38.658
+In fact you half the number of source files.
+
+07:38.659 --> 07:41.822
+And you also get rid of ugly workarounds.
+
+07:41.823 --> 07:46.390
+For example the header guard,
+
+07:46.391 --> 07:53.527
+where you use macros, this will just vanish.
+
+07:53.528 --> 07:56.856
+Now of course also a first example
+
+07:56.857 --> 08:01.467
+on how you can use these modules.
+
+08:01.468 --> 08:10.415
+In the top here you define the module "math.cppm"
+
+08:10.416 --> 08:17.523
+The ending here, the suffix "cppm",
+
+08:17.524 --> 08:23.016
+this is so far depending on the compiler you are using.
+
+08:23.017 --> 08:25.365
+So I call it here "cppm",
+
+08:25.366 --> 08:28.871
+"C++ modules" so to say.
+
+08:28.872 --> 08:32.003
+You can first write what module it is.
+
+08:32.004 --> 08:34.672
+So you have to export module "math".
+
+08:34.673 --> 08:37.881
+You define the module "math".
+
+08:37.882 --> 08:39.896
+And then inside the module,
+
+08:39.897 --> 08:47.606
+you can now specify which functions, which variables,
+
+08:47.607 --> 08:50.655
+which classes you want to export.
+
+08:50.656 --> 08:52.929
+In this case,
+
+08:52.930 --> 08:57.979
+we have one class of one function, that is called "add"
+
+08:57.980 --> 09:03.728
+and we want to export it such that it can be used
+
+09:03.729 --> 09:11.614
+in other parts of the code, that import our module.
+
+09:11.615 --> 09:15.528
+And now if you look at the "main.cpp",
+
+09:15.529 --> 09:19.670
+all you have to do is you have to write "import math",
+
+09:19.671 --> 09:23.317
+then you get all the exported things
+
+09:23.318 --> 09:27.183
+and then in the main function,
+
+09:27.184 --> 09:31.194
+you can for example call this function
+
+09:31.195 --> 09:33.979
+directly from the module.
+
+09:33.980 --> 09:36.584
+This is very nice.
+
+09:36.585 --> 09:41.159
+Now let's take a look at a more complex example
+
+09:41.160 --> 09:44.001
+and also use an interface.
+
+09:44.002 --> 09:48.508
+There is the possibility to have module interface units,
+
+09:48.509 --> 09:54.232
+where you just specify the signatures,
+
+09:54.233 --> 09:56.177
+for example for the function,
+
+09:56.178 --> 09:59.728
+without the implementation.
+
+09:59.729 --> 10:01.447
+"export module math1" and then
+
+10:01.448 --> 10:04.368
+you just specify this "add" function
+
+10:04.369 --> 10:06.183
+and in addition to that you have done
+
+10:06.184 --> 10:08.738
+a module implementation unit,
+
+10:08.739 --> 10:13.622
+where you write "module math1" and then you have
+
+10:13.623 --> 10:15.807
+the implementation of the function.
+
+10:15.808 --> 10:19.684
+And in the main program you have the same as before.
+
+10:19.685 --> 10:22.753
+You can import the "math1" module
+
+10:22.754 --> 10:27.556
+and then you can use the "add" function.
+
+10:27.557 --> 10:29.998
+In order to complete our example,
+
+10:29.999 --> 10:34.994
+let's take a look at the compilation of the module.
+
+10:34.995 --> 10:37.311
+So we are using here the clang
+
+10:37.312 --> 10:42.862
+for other compilers that may be different.
+
+10:42.863 --> 10:47.180
+In the clang case you first
+
+10:47.181 --> 10:50.667
+have to pre-compile the module.
+
+10:50.668 --> 10:56.304
+And this is the module interface "math1"
+
+10:56.305 --> 11:03.013
+and as a result you get such a precompiled module.
+
+11:03.014 --> 11:06.091
+This is step one.
+
+11:06.092 --> 11:08.166
+Step two basically compiles then
+
+11:08.167 --> 11:13.397
+the precompiled module into an object file
+
+11:13.398 --> 11:17.755
+and the source file also into an object file.
+
+11:17.756 --> 11:25.690
+In step three you can compile the main program.
+
+11:25.691 --> 11:31.132
+And four creates then the executable,
+
+11:31.133 --> 11:36.920
+just by specifying all object files
+
+11:36.921 --> 11:41.149
+and this precompiled module.
+
+11:41.150 --> 11:47.282
+This is a new way of setting up
+
+11:47.283 --> 11:55.301
+and compiling your C++ project.
+
+11:55.302 --> 11:59.344
+The second new thing that I want to present
+
+11:59.345 --> 12:02.319
+from the C++ 20 standard
+
+12:02.320 --> 12:04.300
+is co-routines.
+
+12:04.301 --> 12:06.623
+Co-routines are basically functions,
+
+12:06.624 --> 12:10.882
+that can suspend and resume the execution,
+
+12:10.883 --> 12:13.672
+while they keep their state.
+
+12:13.673 --> 12:17.806
+That means you run a function,
+
+12:17.807 --> 12:22.351
+then you stop, you do something else
+
+12:22.352 --> 12:26.285
+and then you can continue at the same position
+
+12:26.286 --> 12:29.931
+and with the same state in the function.
+
+12:29.932 --> 12:35.309
+This is of course also a very nice new feature.
+
+12:35.310 --> 12:37.257
+In order to realize this,
+
+12:37.258 --> 12:40.235
+basically new keywords were added
+
+12:40.236 --> 12:46.835
+to the C++ 20 standard and these are "co_await" and "co_yield".
+
+12:46.836 --> 12:49.782
+In general of course the concept
+
+12:49.783 --> 12:54.082
+of a function was extended.
+
+12:54.083 --> 12:58.122
+This "co_await" expression makes it possible
+
+12:58.123 --> 13:02.831
+to suspend and resume the execution
+
+13:02.832 --> 13:09.071
+and if you use the "co_await" expression in a function,
+
+13:09.072 --> 13:11.282
+for example called "func",
+
+13:11.283 --> 13:19.457
+then the call "getResult = func()" has not to be blocking.
+
+13:19.458 --> 13:22.231
+So it can return immediately,
+
+13:22.232 --> 13:26.399
+if the result of the function is not available.
+
+13:26.400 --> 13:29.620
+And instead of this resource consuming blocking,
+
+13:29.621 --> 13:34.428
+you can have a resource friendly waiting.
+
+13:34.429 --> 13:37.898
+The "co_yield" expression enables you
+
+13:37.899 --> 13:41.493
+to write a generator function
+
+13:41.494 --> 13:47.928
+and this generator function returns on request,
+
+13:47.929 --> 13:52.079
+each time you call it a new value.
+
+13:52.080 --> 13:53.938
+That means the generator function
+
+13:53.939 --> 13:56.429
+is a kind of a data stream,
+
+13:56.430 --> 14:00.829
+from which you can pick values.
+
+14:00.830 --> 14:03.383
+It can be in principle infinite.
+
+14:03.384 --> 14:11.577
+So you can pick an arbitrary number of values from there.
+
+14:11.578 --> 14:18.886
+Conceptionally this allows you lazy evaluation in C++.
+
+14:18.887 --> 14:23.600
+So also an example on that.
+
+14:23.601 --> 14:31.294
+We have a generator for numbers function.
+
+14:31.295 --> 14:33.590
+What we want to do is:
+
+14:33.591 --> 14:36.349
+we want to call this function
+
+14:36.350 --> 14:38.865
+and every time we call it,
+
+14:38.866 --> 14:44.399
+we get a new number returned.
+
+14:44.400 --> 14:49.590
+For that we have this for loop in the function body,
+
+14:49.591 --> 14:52.779
+we start at a certain value,
+
+14:52.780 --> 14:57.885
+so that is passed as begin to the function
+
+14:57.886 --> 15:03.721
+and then we increase by a certain step size.
+
+15:03.722 --> 15:09.795
+This is also provided as an argument to the function.
+
+15:09.796 --> 15:15.195
+And inside the function we have this "co_yield".
+
+15:15.196 --> 15:18.516
+The special thing is the return type
+
+15:18.517 --> 15:21.712
+is now a generator of integers.
+
+15:21.713 --> 15:25.663
+This tells the C++ language, okay,
+
+15:25.664 --> 15:31.849
+here I will get back integer numbers
+
+15:31.850 --> 15:38.169
+and this is a coroutine and
+
+15:38.170 --> 15:43.117
+uses "co_yield" instead of return.
+
+15:43.118 --> 15:47.665
+In the main function you define your numbers.
+
+15:47.666 --> 15:53.459
+And you first use the generator for numbers minus 10.
+
+15:53.460 --> 15:55.605
+So it starts at minus 10
+
+15:55.606 --> 15:58.656
+and always increases by 1.
+
+15:58.657 --> 16:03.499
+And then you print 20 times a number.
+
+16:03.500 --> 16:06.704
+20, 19 and so on.
+
+16:06.705 --> 16:13.491
+After that you create a new generator
+
+16:13.492 --> 16:17.812
+for numbers from 0 to 5
+
+16:17.813 --> 16:26.106
+and in this for loop you basically never end.
+
+16:26.107 --> 16:29.939
+So it will basically print numbers
+
+16:29.940 --> 16:36.048
+starting from 0 with a step size or increment of 5
+
+16:36.049 --> 16:42.984
+and forever it will return you these numbers.
+
+16:42.985 --> 16:56.292
+This is a new feature offered by the C++20 standard.
+
+16:56.293 --> 17:01.086
+Altogether, this standard introduces
+
+17:01.087 --> 17:05.053
+some nice new features.
+
+17:05.054 --> 17:13.431
+The next standard is planned for 2023.
+
+17:13.432 --> 17:20.532
+So every three years this is the intention
+
+17:20.533 --> 17:26.966
+the C++ language gets some new features.
+
+17:26.967 --> 17:31.374
+In general of course in this course
+
+17:31.375 --> 17:35.940
+it is just meant to be an outlook.
+
+17:35.941 --> 17:39.297
+So you don't have to use all of these
+
+17:39.298 --> 17:44.318
+new features in your programs,
+
+17:44.319 --> 17:47.757
+but you should have in mind,
+
+17:47.758 --> 17:56.331
+that as any language or especially also computer language,
+
+17:56.332 --> 18:00.033
+C++ is of course not static,
+
+18:00.034 --> 18:06.210
+but it is under development and changes.
+
+18:06.211 --> 18:10.848
+So thank you very much for your attention
+
+18:10.849 --> 18:17.573
+and I hope that you have enjoyed our course,
+
+18:17.574 --> 18:21.742
+that will be updated regularly.
+
+18:21.743 --> 18:26.119
+So this was now the first semester that we offered it.
+
+18:26.120 --> 18:33.200
+So the contents are in principle complete,
+
+18:33.201 --> 18:40.760
+but nevertheless we will try to add more material,
+
+18:40.761 --> 18:43.981
+such that you can get more practice,
+
+18:43.982 --> 18:46.508
+because this is the most important thing,
+
+18:46.509 --> 18:50.756
+when you learn a new computer language,
+
+18:50.757 --> 18:54.039
+that you practice on your own
+
+18:54.040 --> 18:57.845
+and really program in it
+
+18:57.846 --> 19:03.446
+[Music]

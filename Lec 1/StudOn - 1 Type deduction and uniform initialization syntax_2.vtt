@@ -1,0 +1,775 @@
+WEBVTT
+
+00:01.300 --> 00:08.334
+[Music]
+
+00:13.797 --> 00:17.590
+So welcome to the next part of our course.
+
+00:17.840 --> 00:19.418
+So this time we will talk about
+
+00:19.428 --> 00:22.194
+the uniform initialization syntax.
+
+00:22.494 --> 00:26.495
+So whenever you define a new variable
+
+00:26.511 --> 00:28.489
+and you have another object,
+
+00:29.596 --> 00:32.882
+you always should initialize it.
+
+00:33.292 --> 00:36.880
+So that means basically give it a value.
+
+00:37.506 --> 00:40.647
+If you don't do that it can happen,
+
+00:40.749 --> 00:44.006
+as you see in this very simple example here:
+
+00:44.014 --> 00:47.148
+You have a local variable "i"
+
+00:47.260 --> 00:51.305
+and then if you just define it and you don't initialize it
+
+00:51.352 --> 00:55.772
+then it can in principle have any value.
+
+00:55.959 --> 00:59.290
+So in order to avoid that problem,
+
+00:59.344 --> 01:03.836
+you can now just assign it to "1"
+
+01:04.308 --> 01:07.794
+and then of course if you print,
+
+01:08.240 --> 01:10.840
+the variable it is "1".
+
+01:11.744 --> 01:20.777
+So in the C++ 11 standard there are now several ways,
+
+01:20.875 --> 01:25.720
+how you can visualize your variables.
+
+01:26.040 --> 01:29.855
+So what you see here in this example
+
+01:29.891 --> 01:31.730
+when you just assign it,
+
+01:32.094 --> 01:36.507
+this is the so-called "copy initialization".
+
+01:36.652 --> 01:40.219
+There is also another way to do it,
+
+01:40.244 --> 01:44.731
+this is for this integer case a little bit uncommon,
+
+01:44.806 --> 01:47.969
+but it's also perfectly fine
+
+01:48.327 --> 01:53.544
+and this is the so-called direct initialization.
+
+01:54.286 --> 02:01.278
+And then there is a new way of doing it since C++11:
+
+02:01.411 --> 02:05.877
+If you write it with curly braces
+
+02:06.290 --> 02:11.655
+then this would be a list initialization.
+
+02:12.637 --> 02:15.550
+Of course you can also drop that
+
+02:15.870 --> 02:21.732
+and that would be called value initialization
+
+02:21.949 --> 02:26.455
+So these are the four different ways
+
+02:26.509 --> 02:30.207
+to initialize your variables.
+
+02:30.626 --> 02:36.451
+Now let's see some concrete example,
+
+02:36.731 --> 02:41.478
+how you can invoke these in own classes.
+
+02:41.664 --> 02:47.094
+So let's define a class "X"
+
+02:47.275 --> 02:53.019
+and now in order to cover all different kinds of initialization,
+
+02:53.102 --> 02:58.012
+I define here several constructors.
+
+02:58.190 --> 03:06.288
+So the first constructor just takes as an argument an integer variable
+
+03:07.700 --> 03:10.320
+and then I will just print:
+
+03:10.561 --> 03:17.199
+Okay this is the one I'm currently invoking.
+
+03:18.722 --> 03:20.619
+such that you can see it,
+
+03:20.683 --> 03:23.296
+when it is called.
+
+03:23.975 --> 03:30.071
+The next one is basically the copy constructor.
+
+03:30.154 --> 03:38.654
+So this one takes just a reference to an X object
+
+03:38.895 --> 03:46.755
+and again we print that this one is invoked
+
+03:46.890 --> 03:52.696
+and then there comes a specific one,
+
+03:52.773 --> 03:59.194
+that takes a so called initializer list.
+
+03:59.271 --> 04:05.397
+So these initializer lists are defined in the standard library
+
+04:05.571 --> 04:11.112
+and basically they are implemented as a template class.
+
+04:11.142 --> 04:15.714
+So you can you specify any type, in this case,
+
+04:16.084 --> 04:19.324
+I just want to have an initializer list
+
+04:19.329 --> 04:22.261
+that takes integers.
+
+04:22.375 --> 04:32.335
+And again I copy that one, in order to get the cout.
+
+04:33.303 --> 04:39.631
+And the last one I'm also adding is the assignment operator.
+
+04:41.354 --> 04:45.582
+So this one has the signature,
+
+04:45.777 --> 04:48.409
+that it takes reference to an X
+
+04:48.498 --> 04:52.501
+and it returns also a reference to X here.
+
+04:53.190 --> 04:56.052
+And insides again
+
+04:56.089 --> 05:04.911
+just printing where i am,
+
+05:04.955 --> 05:12.992
+copying the signature and after that I also have to return something,
+
+05:13.089 --> 05:18.029
+in order not to get an error from the compiler.
+
+05:18.095 --> 05:20.655
+And I'm just returning you "this".
+
+05:21.019 --> 05:23.649
+Doesn't matter, okay.
+
+05:23.870 --> 05:30.056
+So when we compile that, that's perfectly fine.
+
+05:30.210 --> 05:32.930
+So this is our test class
+
+05:33.010 --> 05:38.706
+to see the different kinds of initialization.
+
+05:38.789 --> 05:44.417
+So let's start with defining your object
+
+05:44.659 --> 05:56.502
+in a very simple way, by just providing one integer literal as argument,
+
+05:56.798 --> 06:00.347
+of course in this case it's obvious
+
+06:00.492 --> 06:03.538
+that the first constructor is called
+
+06:03.602 --> 06:11.943
+So if we run it of course you have to compile it first...
+
+06:12.078 --> 06:17.611
+Ow, okay we have a small mistake here,
+
+06:17.933 --> 06:22.289
+if you think about it it's an obvious mistake,
+
+06:22.541 --> 06:27.621
+because of course the class starts
+
+06:27.726 --> 06:32.416
+with a private access specifier
+
+06:32.481 --> 06:36.677
+and therefore the constructor in this case
+
+06:36.690 --> 06:39.303
+is of course also private.
+
+06:39.404 --> 06:44.487
+So we cannot call it and this results here in an error.
+
+06:45.383 --> 06:50.762
+I can fix that in two ways. Either I write now here "struct",
+
+06:50.900 --> 06:53.349
+that maybe the simpler way,
+
+06:53.391 --> 07:03.648
+or I of course can also use here the public access specifier.
+
+07:04.722 --> 07:11.847
+So I decide now to go for the simple "struct" X.
+
+07:12.003 --> 07:13.952
+OK and then if I run it,
+
+07:14.075 --> 07:21.475
+then you see, OK, you get here the first option.
+
+07:21.975 --> 07:25.079
+OK, so that's simple.
+
+07:25.098 --> 07:35.246
+Now, let's modify that. Let's say OK we use now the curly braces,
+
+07:35.369 --> 07:42.264
+instead of the usual brackets,
+
+07:42.396 --> 07:45.023
+that also compiles of course.
+
+07:45.070 --> 07:49.083
+And if we run it then what you can observe
+
+07:49.193 --> 07:53.090
+is that now we get basically
+
+07:53.151 --> 07:55.471
+the third option.
+
+07:55.507 --> 07:58.118
+And this is the initializer list.
+
+07:58.189 --> 08:04.240
+And here you can also see how it works in practice.
+
+08:04.347 --> 08:11.035
+So whenever you use the curly braces for initialization
+
+08:11.156 --> 08:16.563
+you get this so-called list initialization.
+
+08:16.630 --> 08:19.959
+And this means that basically,
+
+08:20.103 --> 08:26.595
+it looks for initializer list as an argument.
+
+08:26.842 --> 08:33.146
+And if you have such an argument available,
+
+08:33.260 --> 08:36.504
+then it will call that one.
+
+08:36.526 --> 08:40.083
+So the same you can now do,
+
+08:40.112 --> 08:43.836
+and this is the cool thing about it.
+
+08:43.990 --> 08:55.203
+using several integers here,
+
+08:55.331 --> 08:59.759
+so if you run it, you will see it calls the same.
+
+08:59.832 --> 09:05.000
+So that means an initializer list really is, as expected,
+
+09:05.102 --> 09:10.902
+a list with an arbitrary number of arguments.
+
+09:11.107 --> 09:13.260
+And this is by the way realized,
+
+09:13.358 --> 09:16.500
+by variadic templates internally.
+
+09:16.755 --> 09:19.375
+And in this case of course,
+
+09:19.544 --> 09:23.641
+they expect your integer arguments.
+
+09:23.767 --> 09:27.879
+So, that means if you change it here,
+
+09:27.921 --> 09:32.716
+I have now as a third argument not an integer literal,
+
+09:32.742 --> 09:37.705
+but double literal and I compile it,
+
+09:37.797 --> 09:39.744
+then you get already here
+
+09:40.392 --> 09:43.058
+from the compile and error narrowing conversion
+
+09:43.107 --> 09:46.057
+of 3.0 from double to int.
+
+09:46.228 --> 09:51.298
+So you see this is not a good idea.
+
+09:51.431 --> 09:55.268
+Um, okay, what else can you do of course.
+
+09:55.541 --> 10:06.689
+You can now have a second object of type X.
+
+10:07.003 --> 10:12.327
+And you can basically pass here
+
+10:12.403 --> 10:15.859
+as an argument the first one.
+
+10:15.962 --> 10:19.331
+This works and what it does is basically,
+
+10:19.370 --> 10:25.111
+of course it calls the copy constructor.
+
+10:25.244 --> 10:28.002
+So the second one.
+
+10:28.142 --> 10:34.639
+So this is what we call an explicit call
+
+10:34.721 --> 10:39.093
+of the copy constructor.
+
+10:40.370 --> 10:47.690
+Another alternative is the so-called copy initialization.
+
+10:47.800 --> 10:53.379
+So here I replace my brackets
+
+10:53.499 --> 10:58.350
+that is the directly calling,
+
+10:58.360 --> 11:03.113
+so by direct initialization the copy constructor.
+
+11:03.201 --> 11:09.356
+This also works
+
+11:09.412 --> 11:14.977
+and it will also call the copy constructor.
+
+11:17.220 --> 11:23.214
+So in practice sometimes you want to avoid this copy initialization,
+
+11:23.244 --> 11:27.568
+for example it can have drawbacks,
+
+11:27.728 --> 11:36.458
+if you pass some object by value to a function
+
+11:36.481 --> 11:39.592
+and then you have an implicit
+
+11:39.682 --> 11:42.219
+call of the copy constructor.
+
+11:42.391 --> 11:45.989
+So this can slow down your code.
+
+11:46.063 --> 11:55.270
+So a solution to that is if you basically just
+
+11:55.555 --> 12:00.279
+declare this copy constructor here as explicit
+
+12:00.442 --> 12:04.519
+and then if you want to compile,
+
+12:04.645 --> 12:07.640
+get directly an error here
+
+12:07.922 --> 12:11.990
+and you will not have an implicit call
+
+12:12.029 --> 12:17.580
+to the copy constructor within the copy initialization.
+
+12:18.476 --> 12:20.171
+Okay.
+
+12:20.734 --> 12:25.939
+Of course what you can do nevertheless is:
+
+12:26.173 --> 12:29.530
+let's say we initialize here again like this,
+
+12:30.068 --> 12:35.198
+you can write "x1" equals "x2
+
+12:36.265 --> 12:39.265
+in this case of course you will get
+
+12:39.402 --> 12:45.664
+the classical assignment operator, that is found here.
+
+12:47.059 --> 12:49.129
+Okay.
+
+12:49.784 --> 12:57.241
+A second example that I want to provide is using another class.
+
+12:57.289 --> 13:02.548
+So I just copy this class here
+
+13:02.765 --> 13:06.376
+and since it is a little bit more code
+
+13:06.653 --> 13:10.323
+I'm just walking through it and explain,
+
+13:10.407 --> 13:11.923
+what you see here.
+
+13:12.168 --> 13:20.653
+So we define here a struct S that contains as a member a vector
+
+13:20.767 --> 13:24.619
+and then it has again a constructor
+
+13:24.639 --> 13:27.379
+that takes an initializer list.
+
+13:28.190 --> 13:32.530
+Here you have the initialization
+
+13:32.696 --> 13:36.436
+in the constructor initializer list of "v",
+
+13:36.688 --> 13:43.880
+by this initializer list "l" and then it prints what it did.
+
+13:43.928 --> 13:46.323
+Then you have a function append.
+
+13:46.487 --> 13:53.699
+This one basically adds to the current vector
+
+13:53.781 --> 13:58.459
+the initializer list that you provide.
+
+13:58.588 --> 14:00.953
+And then you have another
+
+14:01.050 --> 14:05.456
+helper function called "c_arr".
+
+14:05.496 --> 14:08.244
+This is a "const" function.
+
+14:08.331 --> 14:14.988
+So that means it cannot change the internal members.
+
+14:15.095 --> 14:16.815
+This is also not necessary here,
+
+14:16.865 --> 14:22.640
+because it just returns returns the address of the first element
+
+14:22.674 --> 14:27.669
+of the vector and the size of the vector.
+
+14:27.761 --> 14:29.891
+And the interesting thing is,
+
+14:30.038 --> 14:32.885
+what you can observe here:
+
+14:33.043 --> 14:40.188
+it basically creates a pair out of these two things
+
+14:40.326 --> 14:45.081
+and this pair is created by just specifying here
+
+14:45.126 --> 14:47.837
+in curly braces the two elements.
+
+14:47.899 --> 14:51.658
+So that means this is a way
+
+14:51.687 --> 14:55.325
+how you can basically return a list of things
+
+14:56.322 --> 15:00.540
+and this is of course sometimes very practical.
+
+15:00.725 --> 15:05.531
+What will happen here in that case is basically,
+
+15:05.653 --> 15:09.000
+that the corresponding constructor
+
+15:09.106 --> 15:12.103
+from the pair class is called
+
+15:12.158 --> 15:14.828
+and of course this also has to take then
+
+15:15.624 --> 15:18.153
+an initializer list. Okay.
+
+15:18.208 --> 15:25.354
+And now last but not least let's do an example here.
+
+15:25.583 --> 15:35.284
+Also this one i will copy here.
+
+15:36.083 --> 15:40.087
+And then we go through it step by step.
+
+15:40.230 --> 15:43.539
+So in the first line you see here,
+
+15:43.679 --> 15:50.425
+that an object is created, a small s,
+
+15:50.504 --> 15:56.760
+and it is using "int" as a template parameter here
+
+15:56.831 --> 15:59.669
+to the s class.
+
+16:00.021 --> 16:03.839
+So the vector will contain integers
+
+16:03.897 --> 16:12.920
+And then what we observe here, we observe here copy list initialization.
+
+16:13.073 --> 16:16.059
+So it's kind of a mixture of the two,
+
+16:16.319 --> 16:22.251
+because you have on the one hand the equal.
+
+16:22.398 --> 16:25.661
+So this is the copy initialization.
+
+16:25.826 --> 16:28.370
+and this one is combined
+
+16:28.402 --> 16:33.803
+with the initializer list.
+
+16:33.882 --> 16:38.894
+This one can also be short and written like this,
+
+16:38.971 --> 16:43.715
+but now, okay, let's do this version.
+
+16:43.857 --> 16:46.880
+In this next line you basically append
+
+16:46.946 --> 16:53.813
+to this vector three more numbers.
+
+16:53.957 --> 16:56.608
+Here you have now a list initialization
+
+16:56.609 --> 17:02.017
+in the function call, as you can observe here.
+
+17:02.058 --> 17:04.202
+So it takes as argument
+
+17:04.281 --> 17:14.827
+and initialize a list then we just print the vector size.
+
+17:15.059 --> 17:17.330
+And this is also interesting,
+
+17:17.385 --> 17:23.532
+because we can call this member function "c_arr"
+
+17:23.731 --> 17:25.975
+and it returns a pair
+
+17:26.122 --> 17:31.852
+and then we can print the second member of this pair.
+
+17:32.067 --> 17:35.881
+So remember, a pair, you can basically access
+
+17:35.948 --> 17:37.670
+by first and second,
+
+17:37.740 --> 17:41.157
+so the first in the second element.
+
+17:41.429 --> 17:46.023
+Then the next is just basically printing
+
+17:46.111 --> 17:50.758
+the contents of the vector to standard out.
+
+17:50.843 --> 17:53.295
+So this is using the standard library.
+
+17:53.375 --> 17:56.165
+First of all the the copy function,
+
+17:56.937 --> 18:02.738
+that gets iterator interval here.
+
+18:02.833 --> 18:05.202
+So from beginning to end of the vector
+
+18:05.379 --> 18:11.188
+and then it uses an output stream iterator of integers,
+
+18:11.289 --> 18:14.079
+to print to the stream "cout".
+
+18:14.194 --> 18:19.353
+with a separator, yeah, basically blank.
+
+18:19.452 --> 18:29.049
+So after that the whole vector elements will be plotted.
+
+18:29.224 --> 18:32.374
+Then in the next line
+
+18:32.394 --> 18:37.776
+you see an example here that uses the for each.
+
+18:37.852 --> 18:45.946
+So this you can also use now.
+
+18:45.959 --> 18:48.355
+That means you have this list minus 1,
+
+18:48.371 --> 18:53.627
+minus 2, minus 3, and X will be now
+
+18:53.683 --> 18:56.489
+each element of the list.
+
+18:56.580 --> 19:00.739
+And then in the body of the loop,
+
+19:00.887 --> 19:06.583
+you can print the elements separated by again a blank.
+
+19:06.672 --> 19:13.904
+And the last example is here,
+
+19:13.977 --> 19:24.950
+the initializer list, that is stored in an auto object.
+
+19:25.069 --> 19:27.619
+Of course this is again initializer list
+
+19:28.207 --> 19:34.723
+And this also works with a new standard.
+
+19:34.760 --> 19:40.488
+So if we print all together,
+
+19:40.629 --> 19:44.006
+the things then you see as expected.
+
+19:44.080 --> 19:47.518
+The vector size is now of course 8 ints.
+
+19:47.559 --> 19:52.782
+Then integer vector is printed
+
+19:52.848 --> 19:55.468
+and then during this for loop
+
+19:55.566 --> 20:00.265
+the X is printed and the last thing is
+
+20:00.411 --> 20:02.928
+the list you get from your
+
+20:03.029 --> 20:08.716
+initialization here is of size 3
+
+20:08.928 --> 20:12.996
+So all of these things are working.
+
+20:13.166 --> 20:18.971
+So let's summarize this new uniform initialization syntax.
+
+20:19.095 --> 20:20.273
+So it's called uniform,
+
+20:20.275 --> 20:24.258
+because basically you can restrict yourself
+
+20:24.440 --> 20:27.578
+to the curly braces notation.
+
+20:27.689 --> 20:33.723
+Yeah. The most important new thing is
+
+20:33.801 --> 20:40.488
+the initializer list and now if you define
+
+20:40.591 --> 20:44.994
+a new class you should by default also provide
+
+20:45.215 --> 20:47.907
+such initialization list constructor.
+
+20:47.980 --> 20:53.932
+For example in order to be conformed
+
+20:54.018 --> 20:57.590
+to the standard library.
+
+20:57.668 --> 21:03.355
+OK. So thank you very much for listening
+
+21:03.453 --> 21:06.669
+to this part
+
+21:06.743 --> 21:12.763
+and we will see each other in the next part.

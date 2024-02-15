@@ -1,0 +1,286 @@
+WEBVTT
+
+00:01.315 --> 00:08.202
+[Music]
+
+00:11.179 --> 00:17.712
+When we talk about copy control, then this is very important,
+
+00:17.713 --> 00:21.089
+if you define own classes,
+
+00:21.090 --> 00:25.805
+that should have value behavior.
+
+00:25.806 --> 00:30.243
+So one very basic example could be:
+
+00:30.244 --> 00:33.615
+you define a class for complex numbers.
+
+00:33.616 --> 00:36.071
+And of course, class for complex numbers,
+
+00:36.072 --> 00:38.089
+you want to add complex numbers,
+
+00:38.090 --> 00:43.143
+you want to copy complex numbers, assign it to each other.
+
+00:43.144 --> 00:46.964
+The same thing could be: you have a vector,
+
+00:46.965 --> 00:50.700
+like this also found in the standard library,
+
+00:50.701 --> 00:56.836
+or any other object, that you want to use
+
+00:56.837 --> 01:03.016
+in a value like way and assign it to each other.
+
+01:03.017 --> 01:07.804
+So copy control is basically,
+
+01:07.805 --> 01:12.074
+that you have to define special member functions,
+
+01:12.075 --> 01:16.234
+that control what happens to your object,
+
+01:16.235 --> 01:23.212
+when you copy them or assign them, or you destroy it.
+
+01:23.213 --> 01:26.058
+And in order to implement copy control
+
+01:26.059 --> 01:30.908
+for a class, you basically have to implement three
+
+01:30.909 --> 01:37.372
+or now since C++11 five different
+
+01:37.373 --> 01:41.684
+functions, member functions basically.
+
+01:41.685 --> 01:43.961
+You need a destructor.
+
+01:43.962 --> 01:47.500
+The destructor of course does the cleaning up,
+
+01:47.501 --> 01:51.704
+when your object is destroyed,
+
+01:51.705 --> 01:58.080
+a copy constructor as it basically is invoked,
+
+01:58.081 --> 02:03.261
+when you copy the object,
+
+02:03.262 --> 02:08.117
+or and in addition to that the assignment operator.
+
+02:08.118 --> 02:11.320
+And for the move versions,
+
+02:11.321 --> 02:14.312
+that of course take them r-value references
+
+02:14.313 --> 02:15.734
+you have the move constructor
+
+02:15.735 --> 02:20.405
+and the move assignment operator.
+
+02:20.406 --> 02:23.784
+A little bit more details about the copy constructor.
+
+02:23.785 --> 02:27.635
+So what does it do? It initializes a new object
+
+02:27.636 --> 02:31.982
+as a copy of another object
+
+02:31.983 --> 02:36.986
+and it is applied implicitly to pass object
+
+02:36.987 --> 02:40.069
+to or from a function by value.
+
+02:40.070 --> 02:43.994
+If you want to prevent that, remember you have
+
+02:43.995 --> 02:48.926
+to define the copy constructor to be explicit.
+
+02:48.927 --> 02:51.886
+And also a second thing to know,
+
+02:51.887 --> 02:55.002
+if you do not define your own copy constructor,
+
+02:55.003 --> 02:59.964
+the compiler synthesizes one for you.
+
+02:59.965 --> 03:04.454
+Again the list. When it is used?
+
+03:04.455 --> 03:08.062
+If you initialize one object from another.
+
+03:08.063 --> 03:11.502
+Copy an object to pass it as an argument to a function,
+
+03:11.503 --> 03:14.557
+copy an object to return it from a function,
+
+03:14.558 --> 03:17.998
+initialize the elements in a sequential container,
+
+03:17.999 --> 03:23.164
+or also initialize the elements in an array.
+
+03:23.165 --> 03:28.901
+So there are several places, where it is invoked.
+
+03:28.902 --> 03:35.157
+The synthesized copy constructor is as said
+
+03:35.158 --> 03:37.672
+created by the compiler
+
+03:37.673 --> 03:42.708
+and what it does. It does member wise initialization
+
+03:42.709 --> 03:46.626
+of the new object from the existing one.
+
+03:46.627 --> 03:49.783
+That means it copies member by member
+
+03:49.784 --> 03:52.584
+from the old object to the new one.
+
+03:52.585 --> 03:56.879
+If you have built-in or compound type members,
+
+03:56.880 --> 03:58.896
+then they are directly copied
+
+03:58.897 --> 04:01.458
+and the class type members,
+
+04:01.459 --> 04:07.063
+they again invoke the members copy constructor.
+
+04:07.064 --> 04:12.797
+Here again in red, if you want to prevent copies in general,
+
+04:12.798 --> 04:16.782
+then you must explicitly declare
+
+04:16.783 --> 04:19.139
+your copy constructor as private.
+
+04:19.140 --> 04:21.808
+So you cannot access it from outside,
+
+04:21.809 --> 04:26.932
+or you just write that it is "= delete",
+
+04:26.933 --> 04:32.167
+then it will be not created at all.
+
+04:32.168 --> 04:35.912
+The assignment operator is the one
+
+04:35.913 --> 04:40.181
+you can overload inside your class
+
+04:40.182 --> 04:44.426
+and it tells you, what it means to assign one object
+
+04:44.427 --> 04:49.372
+of a class to another one of the same type.
+
+04:49.373 --> 04:52.616
+Must be defined as a member
+
+04:52.617 --> 04:58.281
+and it should return a reference to its object.
+
+04:58.282 --> 05:03.200
+Again if you don't define your own assignment operator,
+
+05:03.201 --> 05:09.203
+then the compiler synthesizes for you
+
+05:09.204 --> 05:14.075
+And here the same things hold as for the copy constructor,
+
+05:14.076 --> 05:22.513
+so it's working basically member wise, the assignment
+
+05:22.514 --> 05:25.452
+And also the same rules apply
+
+05:25.453 --> 05:27.674
+for the built-in or compound types,
+
+05:27.675 --> 05:31.688
+they are assigned directly and the class type members,
+
+05:31.689 --> 05:37.925
+they again invoke the members assignment operator.
+
+05:37.926 --> 05:42.172
+The destructor is now a special member function,
+
+05:42.173 --> 05:44.323
+that cleans up an object,
+
+05:44.324 --> 05:48.978
+when it goes out of scope or is deleted.
+
+05:48.979 --> 05:53.893
+The compiler here automatically destroys each member.
+
+05:53.894 --> 05:56.572
+For the members of class type
+
+05:56.573 --> 06:02.152
+the corresponding destructors are invoked.
+
+06:02.153 --> 06:05.605
+And for the built-in or compound types
+
+06:05.606 --> 06:09.470
+no explicit work is done to destroy them.
+
+06:09.471 --> 06:13.471
+So when the object pointed to
+
+06:13.472 --> 06:17.168
+by a pointer member is not deleted,
+
+06:17.169 --> 06:22.487
+this means you can have a memory leak
+
+06:22.488 --> 06:26.427
+and therefore basically all memory,
+
+06:26.428 --> 06:31.347
+that you have dynamically allocated in the class,
+
+06:31.348 --> 06:35.871
+you have also to free in the destructor.
+
+06:35.872 --> 06:48.218
+[Music]
+
+06:48.219 --> 06:52.688
+programming examples see you for the
+
+06:52.689 --> 06:53.689
+next video

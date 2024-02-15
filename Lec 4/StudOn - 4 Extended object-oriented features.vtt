@@ -1,0 +1,586 @@
+WEBVTT
+
+00:01.327 --> 00:15.730
+[Music]
+
+00:15.731 --> 00:19.522
+Our next topic is operator overloading.
+
+00:19.523 --> 00:22.868
+So this is important in the context
+
+00:22.869 --> 00:27.740
+of defining your own value classes.
+
+00:27.741 --> 00:33.105
+An example is you want to implement a vector class
+
+00:33.106 --> 00:36.798
+or a matrix class or a complex number class.
+
+00:36.799 --> 00:41.728
+And then you want to have the classical operators
+
+00:41.729 --> 00:47.180
+like "+" "-" "*" overloaded for objects
+
+00:47.181 --> 00:51.596
+of this own class type.
+
+00:51.597 --> 00:54.644
+And in order to do that
+
+00:54.645 --> 00:56.218
+you first have to know,
+
+00:56.219 --> 00:59.154
+what is an overloaded operator.
+
+00:59.155 --> 01:05.241
+In principle in C++ operators are functions.
+
+01:05.242 --> 01:11.613
+So they can be overloaded like usual functions.
+
+01:11.614 --> 01:16.212
+That means you just can redefine them
+
+01:16.213 --> 01:20.717
+dependent on the concrete types of the objects
+
+01:20.718 --> 01:24.437
+you pass as arguments.
+
+01:24.438 --> 01:28.071
+If you overload these operators,
+
+01:28.072 --> 01:30.776
+then of course they must have an operand
+
+01:30.777 --> 01:35.248
+of this class type and that means:
+
+01:35.249 --> 01:39.290
+this is enforcing the requirement,
+
+01:39.291 --> 01:43.624
+that the overloaded operator does not redefine
+
+01:43.625 --> 01:45.920
+the meaning of the operators,
+
+01:45.921 --> 01:51.009
+when you apply them to objects of built-in types.
+
+01:51.010 --> 01:55.901
+Of course you should stick to the rule
+
+01:55.902 --> 01:59.863
+that you don't override these meanings
+
+01:59.864 --> 02:02.432
+for built-in types.
+
+02:02.433 --> 02:08.644
+Then you cannot change the precedence and associativity,
+
+02:08.645 --> 02:10.291
+when you overload operators.
+
+02:10.292 --> 02:15.193
+So they are fixed by the language
+
+02:15.194 --> 02:19.876
+Here in the last line, you see a link
+
+02:19.877 --> 02:23.421
+to the cpp reference website.
+
+02:23.422 --> 02:26.991
+There you can basically see the precedence
+
+02:26.992 --> 02:35.201
+for all of the predefined operators in C++.
+
+02:35.202 --> 02:38.607
+In addition to that the short-circuit evaluation
+
+02:38.608 --> 02:41.146
+is not preserved.
+
+02:41.147 --> 02:45.842
+Short-circuit evaluation, just to remind you is,
+
+02:45.843 --> 02:50.114
+when you have an if statement, for example
+
+02:50.115 --> 02:52.764
+and there you have the condition.
+
+02:52.765 --> 02:55.881
+And then you have two parts, so,
+
+02:55.882 --> 03:02.086
+first part would be "a == 1"
+
+03:02.087 --> 03:09.748
+and second part would be "&& b > 2".
+
+03:09.749 --> 03:14.632
+Then basically if the first sub expression
+
+03:14.633 --> 03:20.637
+is evaluated to for example false,
+
+03:20.638 --> 03:23.895
+then the second one is not evaluated anymore,
+
+03:23.896 --> 03:28.894
+because in order to result in true, of course
+
+03:28.895 --> 03:32.746
+both have to be true.
+
+03:32.747 --> 03:37.897
+So this is the short-circuit evaluation.
+
+03:37.898 --> 03:42.715
+Then the other thing is that overloaded functions,
+
+03:42.716 --> 03:48.382
+that are members have one parameter less,
+
+03:48.383 --> 03:50.023
+than the typical operator.
+
+03:50.024 --> 03:52.697
+So for example "+", of course
+
+03:52.698 --> 03:56.239
+has two operands "a + b",
+
+03:56.240 --> 03:59.556
+but if the operator "+" is defined
+
+03:59.557 --> 04:02.872
+inside the class as a member function
+
+04:02.873 --> 04:05.193
+then it has only one argument,
+
+04:05.194 --> 04:06.947
+because the second argument comes
+
+04:06.948 --> 04:13.618
+from the "this", so the object itself.
+
+04:13.619 --> 04:21.745
+So then of course there are some design rules.
+
+04:21.746 --> 04:26.273
+First of all you should not overload operators
+
+04:26.274 --> 04:29.372
+with built-in meanings.
+
+04:29.373 --> 04:31.727
+An example is the comma operator,
+
+04:31.728 --> 04:37.341
+the address-of operator, logical and, or.
+
+04:37.342 --> 04:41.126
+Those things, of course, the user expects
+
+04:41.127 --> 04:44.711
+certain things to happen, if he uses them
+
+04:44.712 --> 04:51.797
+and it is very confusing, if you overload them.
+
+04:51.798 --> 04:55.278
+If you have to do it, they should really work
+
+04:55.279 --> 05:00.004
+as you would intuitively expect.
+
+05:00.005 --> 05:05.543
+The other thing of course is when you have classes
+
+05:05.544 --> 05:13.553
+that you want to use together with the standard library.
+
+05:13.554 --> 05:18.572
+So like, you want to have containers like vector,
+
+05:18.573 --> 05:22.158
+that uses your class as an element type,
+
+05:22.159 --> 05:27.924
+then you must follow some rules.
+
+05:27.925 --> 05:32.708
+So for example you should define the less than operator
+
+05:32.709 --> 05:39.291
+or the equivalent operator in order to be able to,
+
+05:39.292 --> 05:46.278
+for example, sort your elements.
+
+05:46.279 --> 05:52.346
+In addition to that it is then good to also define
+
+05:52.347 --> 05:56.184
+the other operators, that are related to these.
+
+05:56.185 --> 05:57.526
+So if you have "<",
+
+05:57.527 --> 06:05.627
+you should also overload ">" and so on.
+
+06:05.628 --> 06:07.852
+And the general rule is,
+
+06:07.853 --> 06:13.273
+when you are not sure that it is obvious,
+
+06:13.274 --> 06:17.383
+what you're overloaded operated does,
+
+06:17.384 --> 06:20.879
+then don't overload
+
+06:20.880 --> 06:22.361
+and just define a function,
+
+06:22.362 --> 06:24.650
+that gives your operation a name
+
+06:24.651 --> 06:29.458
+and that you can direct the call.
+
+06:29.459 --> 06:33.495
+Then there are basically different classes of operators.
+
+06:33.496 --> 06:39.510
+So there are operators that you must define as a member
+
+06:39.511 --> 06:42.879
+and operators that you can define
+
+06:42.880 --> 06:45.336
+as a member function
+
+06:45.337 --> 06:50.120
+and operators that you cannot.
+
+06:50.121 --> 06:52.386
+The first ones here in the list,
+
+06:52.387 --> 06:58.014
+so assignment these brackets and arrow operator,
+
+06:58.015 --> 07:04.420
+they must be members. The same way,
+
+07:04.421 --> 07:08.487
+so like assignment, the compound assignment operators,
+
+07:08.488 --> 07:13.966
+they also should be members of the class.
+
+07:13.967 --> 07:16.614
+In addition to that things like
+
+07:16.615 --> 07:20.258
+increment, decrement, dereference,
+
+07:20.259 --> 07:23.121
+they also should be member functions.
+
+07:23.122 --> 07:32.234
+And the symmetric operators like "+",
+
+07:32.235 --> 07:37.404
+they should be non-member function.
+
+07:37.405 --> 07:40.120
+So now we come to some concrete examples.
+
+07:40.121 --> 07:45.279
+And we start with input and output operators.
+
+07:45.280 --> 07:49.361
+Here it is important to be consistent
+
+07:49.362 --> 07:52.602
+with the standard i/o library.
+
+07:52.603 --> 07:56.979
+And basically offer the same functionality
+
+07:56.980 --> 08:01.862
+that the classical "cout" and "cin" objects do
+
+08:01.863 --> 08:05.890
+for built-in types, for example.
+
+08:05.891 --> 08:07.847
+And for that you can overload
+
+08:07.848 --> 08:15.422
+these output operators in the same way.
+
+08:15.423 --> 08:19.655
+The i/o operators must be non-member functions.
+
+08:19.656 --> 08:20.887
+The reason for that is,
+
+08:20.888 --> 08:22.980
+if they would be members,
+
+08:22.981 --> 08:26.565
+then of course the left hand operand
+
+08:26.566 --> 08:32.055
+would have to be an object of the class type
+
+08:32.056 --> 08:35.292
+and then you cannot realize the typical behavior,
+
+08:35.293 --> 08:40.356
+beause they should return a reference
+
+08:40.357 --> 08:47.942
+to the stream object and also the first argument
+
+08:47.943 --> 08:50.609
+has to be a stream object
+
+08:50.610 --> 08:54.491
+And not "this".
+
+08:54.492 --> 08:56.180
+This is the in order to
+
+08:56.181 --> 09:03.555
+chain these output or input streams.
+
+09:03.556 --> 09:09.072
+And here in red you find basically two examples,
+
+09:09.073 --> 09:15.211
+of how you can overload these operators.
+
+09:15.212 --> 09:17.746
+It is a good idea to define them
+
+09:17.747 --> 09:20.695
+as a friend function because then,
+
+09:20.696 --> 09:23.626
+you can also directly access
+
+09:23.627 --> 09:27.603
+the private part of your class.
+
+09:27.604 --> 09:31.209
+So here is the "Sales_item" class
+
+09:31.210 --> 09:37.433
+as an example for an own class type.
+
+09:37.434 --> 09:41.124
+Important is also that your input operators
+
+09:41.125 --> 09:43.627
+deal with errors.
+
+09:43.628 --> 09:49.232
+Of course you can for example try to read something
+
+09:49.233 --> 09:53.576
+from a file and then you get end of file.
+
+09:53.577 --> 09:58.351
+Or you have for example inputs that have
+
+09:58.352 --> 09:59.560
+the wrong type.
+
+09:59.561 --> 10:04.055
+Also that is handled by the standard i/o library,
+
+10:04.056 --> 10:09.822
+as you know from our previous example.
+
+10:09.823 --> 10:15.308
+Because, of course, the object that you read
+
+10:15.309 --> 10:25.545
+should be left in a usable and consistent state.
+
+10:25.546 --> 10:29.249
+That means once you read into an object,
+
+10:29.250 --> 10:33.437
+then it should be possible also to read,
+
+10:33.438 --> 10:40.423
+maybe another item into the stream.
+
+10:40.424 --> 10:42.760
+So what you can do is you can also set
+
+10:42.761 --> 10:46.636
+the condition states of the istream parameter,
+
+10:46.637 --> 10:50.111
+if it is necessary.
+
+10:50.112 --> 10:55.560
+So could be you set the fail bit,
+
+10:55.561 --> 11:04.184
+if something happens or an error occurs
+
+11:04.185 --> 11:06.588
+The next type of operators are
+
+11:06.589 --> 11:11.260
+the arithmetic and relational operators
+
+11:11.261 --> 11:12.616
+If you implement them,
+
+11:12.617 --> 11:16.505
+you should also implement the compound assignment operators.
+
+11:16.506 --> 11:17.568
+So not only "+",
+
+11:17.569 --> 11:24.400
+but also "+=" and you should have in mind,
+
+11:24.401 --> 11:29.296
+that especially the "==" operator
+
+11:29.297 --> 11:32.518
+and the "<" operator are used
+
+11:32.519 --> 11:36.297
+in the standard library by many of the generic algorithms.
+
+11:36.298 --> 11:39.103
+So you should always provide them,
+
+11:39.104 --> 11:45.636
+if you want your class type to be used
+
+11:45.637 --> 11:49.470
+as an container element type.
+
+11:49.471 --> 11:51.272
+Again two examples,
+
+11:51.273 --> 11:55.144
+for the symmetric plus operator,
+
+11:55.145 --> 11:59.368
+that takes a constant reference
+
+11:59.369 --> 12:00.788
+for the left hand side
+
+12:00.789 --> 12:03.603
+and constant reference for the right hand side
+
+12:03.604 --> 12:11.458
+and it returns an object.
+
+12:11.459 --> 12:15.359
+Of course the assignment operators,
+
+12:15.360 --> 12:19.167
+they also can be overloaded.
+
+12:19.168 --> 12:22.018
+The assignment and the subscript, I mentioned it already,
+
+12:22.019 --> 12:26.290
+they must be class members
+
+12:26.291 --> 12:34.492
+and assignment should return a reference to "this".
+
+12:34.493 --> 12:37.852
+in order to support the expected behavior
+
+12:37.853 --> 12:41.804
+for non constant and constant objects.
+
+12:41.805 --> 12:44.241
+You should provide two versions
+
+12:44.242 --> 12:46.292
+of the subscript operator.
+
+12:46.293 --> 12:50.479
+So that means, of course if you define
+
+12:50.480 --> 12:54.671
+a constant object and you use
+
+12:54.672 --> 12:57.690
+the subscript operator to access it,
+
+12:57.691 --> 13:04.384
+then you do not want to overwrite the value.
+
+13:04.385 --> 13:09.182
+So this of course should be a const member function,
+
+13:09.183 --> 13:12.621
+but if you define a non const object
+
+13:12.622 --> 13:14.103
+of your class type
+
+13:14.104 --> 13:16.495
+and use the subscript operator,
+
+13:16.496 --> 13:21.647
+then it should be possible, also to set the value in there.
+
+13:21.648 --> 13:27.473
+So it is a non constant member function.
+
+13:27.474 --> 13:31.763
+And the last type of operators I want to discuss here,
+
+13:31.764 --> 13:36.854
+are the increment and decrement operators.
+
+13:36.855 --> 13:40.048
+Here you should also try to be consistent
+
+13:40.049 --> 13:41.571
+with the built-in operators.
+
+13:41.572 --> 13:46.050
+So, that means the prefix operator
+
+13:46.051 --> 13:47.840
+should return a reference
+
+13:47.841 --> 13:52.514
+to the incremented or decremented value
+
+13:52.515 --> 13:58.180
+and the postfix should return basically
+
+13:58.181 --> 13:59.181
+the old value.

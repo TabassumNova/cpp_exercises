@@ -1,0 +1,553 @@
+WEBVTT
+
+00:01.318 --> 00:14.606
+[Music]
+
+00:14.607 --> 00:23.564
+Next we will talk about class inheritance.
+
+00:23.565 --> 00:27.074
+This is a very important topic,
+
+00:27.075 --> 00:31.084
+in the context of object-oriented programming.
+
+00:31.085 --> 00:33.905
+Just as a repetition.
+
+00:33.906 --> 00:38.068
+So object-oriented program is a term,
+
+00:38.069 --> 00:40.066
+that is used to describe programs,
+
+00:40.067 --> 00:44.863
+that use first of all data abstraction, second inheritance
+
+00:44.864 --> 00:48.560
+and third dynamic binding.
+
+00:48.561 --> 00:52.596
+Data abstractions or interface implementation.
+
+00:52.597 --> 00:54.005
+I think you know already
+
+00:54.006 --> 00:56.630
+from the first two courses.
+
+00:56.631 --> 00:59.060
+You also know in principle inheritance
+
+00:59.061 --> 01:00.555
+and dynamic binding,
+
+01:00.556 --> 01:07.535
+but also that I want to repeat now briefly
+
+01:07.536 --> 01:11.284
+So first polymorphism.
+
+01:11.285 --> 01:13.951
+This refers to the ability,
+
+01:13.952 --> 01:18.774
+that you can obtain type specific behavior.
+
+01:18.775 --> 01:23.166
+And in C++ this is based on the dynamic type
+
+01:23.167 --> 01:25.699
+of a reference or a pointer.
+
+01:25.700 --> 01:30.806
+So, this means and there are in principle two forms
+
+01:30.807 --> 01:33.505
+of polymorphism, if we talk about
+
+01:33.506 --> 01:36.904
+dynamic polymorphism,
+
+01:36.905 --> 01:41.965
+then this is in the context of classes and inheritance
+
+01:41.966 --> 01:46.714
+and in addition to the static type,
+
+01:46.715 --> 01:48.724
+that you have in your program,
+
+01:48.725 --> 01:51.918
+you also have then a dynamic type,
+
+01:51.919 --> 01:55.273
+that can be different from the static type
+
+01:55.274 --> 02:01.115
+and in this way you can at runtime dynamically
+
+02:01.116 --> 02:07.171
+decide, for example which function you want to call.
+
+02:07.172 --> 02:11.652
+So, from the base or from the derived class
+
+02:11.653 --> 02:16.183
+and this process is in principle called dynamic binding.
+
+02:16.184 --> 02:20.832
+So that is delaying until runtime
+
+02:20.833 --> 02:26.966
+the selection of which function you want to run.
+
+02:26.967 --> 02:28.710
+As said in C++
+
+02:28.711 --> 02:34.752
+this is based on virtual functions.
+
+02:34.753 --> 02:38.255
+Now again the definition: What is inheritance?
+
+02:38.256 --> 02:42.556
+These are basically types related by inheritance,
+
+02:42.557 --> 02:47.129
+that share a common interface.
+
+02:47.130 --> 02:51.182
+You have the base class, so this is a class,
+
+02:51.183 --> 02:53.040
+that is a parent of another class
+
+02:53.041 --> 02:57.326
+and derived class, this is a class
+
+02:57.327 --> 03:03.711
+that shares an interface with its parent class.
+
+03:03.712 --> 03:05.634
+Inside the derived class
+
+03:05.635 --> 03:09.588
+you can redefine the members of the base
+
+03:09.589 --> 03:13.676
+and you can also add new members.
+
+03:13.677 --> 03:18.034
+About the scope, so the derived class scope is basically
+
+03:18.035 --> 03:21.352
+nested in the scope of the base class.
+
+03:21.353 --> 03:23.526
+That means that the derived class
+
+03:23.527 --> 03:28.347
+can also access the members of the base class directly
+
+03:28.348 --> 03:32.392
+and the members, that are defined in the derived class,
+
+03:32.393 --> 03:36.227
+with the same name as the members in the base class.
+
+03:36.228 --> 03:39.672
+They hide those members.
+
+03:39.673 --> 03:43.220
+So that means member functions in the derived
+
+03:43.221 --> 03:47.980
+do not overload members from the base.
+
+03:47.981 --> 03:52.027
+If you nevertheless want to access these hidden members,
+
+03:52.028 --> 03:58.681
+then you can just use the scope operator for it.
+
+03:58.682 --> 04:06.420
+Then you have a specific access label or access specifier
+
+04:06.421 --> 04:09.890
+and this is the protected one.
+
+04:09.891 --> 04:11.156
+If you have members,
+
+04:11.157 --> 04:16.598
+that you define after that protected specifier,
+
+04:16.599 --> 04:19.930
+then these may be accessed by class members
+
+04:19.931 --> 04:26.303
+and also friends and by the members of a derived class
+
+04:26.304 --> 04:28.399
+and not by the ordinary users.
+
+04:28.400 --> 04:32.413
+So it's not public.
+
+04:32.414 --> 04:34.289
+From the syntax point of view
+
+04:34.290 --> 04:37.605
+you have then after the class,
+
+04:37.606 --> 04:41.171
+so you write class "myclass",
+
+04:41.172 --> 04:45.577
+the class derivation list after ":"
+
+04:45.578 --> 04:51.987
+and there you can basically list all the base classes
+
+04:51.988 --> 05:00.325
+you inherit from, with optional access label.
+
+05:00.326 --> 05:04.100
+By default if you don't write an access label,
+
+05:04.101 --> 05:07.268
+then the type of inheritance depends
+
+05:07.269 --> 05:11.472
+on the keyword used to define the derived class.
+
+05:11.473 --> 05:16.807
+By default that means if you have a derived class
+
+05:16.808 --> 05:20.540
+defined by the struct keyword, then public
+
+05:20.541 --> 05:28.321
+and if it's by the class keyword, then private.
+
+05:28.322 --> 05:31.739
+Now, if you look at it conceptionally,
+
+05:31.740 --> 05:37.579
+then that means derived objects contain their base class
+
+05:37.580 --> 05:41.937
+as sub objects.
+
+05:41.938 --> 05:46.330
+However, there is no requirement that the compiler
+
+05:46.331 --> 05:53.542
+in fact lays out the base and derived class parts
+
+05:53.543 --> 05:56.013
+as an object in memory contiguously.
+
+05:56.014 --> 06:02.640
+So there is no rule that enforces that.
+
+06:02.641 --> 06:09.146
+A class must be defined to be used as a base class.
+
+06:09.147 --> 06:14.093
+You can also prevent that by the final keyword,
+
+06:14.094 --> 06:15.590
+when you define the class.
+
+06:15.591 --> 06:20.844
+Then you cannot use it as a base class.
+
+06:20.845 --> 06:22.784
+If you do forward declarations,
+
+06:22.785 --> 06:29.257
+then you must not include this class derivation lists
+
+06:29.258 --> 06:33.979
+and the so-called immediate or direct base class,
+
+06:33.980 --> 06:43.486
+means the base class from which you directly derive.
+
+06:43.487 --> 06:49.690
+Example: this class base here is just an empty class
+
+06:49.691 --> 06:51.816
+and then you have the class "d1".
+
+06:51.817 --> 06:56.251
+And then you have your class derivation list,
+
+06:56.252 --> 07:04.267
+where you have the base class publicly derived "public Base".
+
+07:04.268 --> 07:10.723
+As said, you cannot do it when you only have
+
+07:10.724 --> 07:12.523
+the class declaration.
+
+07:12.524 --> 07:20.525
+So the second line would result in an error.
+
+07:20.526 --> 07:24.579
+Here, first of all, you have again visualized
+
+07:24.580 --> 07:29.448
+how such a derived object looks like.
+
+07:29.449 --> 07:34.503
+So, this "Derived 1" contains now
+
+07:34.504 --> 07:39.988
+as a sub object the base object
+
+07:39.989 --> 07:45.371
+and then you can of course for example assign something.
+
+07:45.372 --> 07:52.592
+So you can assign a derived class to base.
+
+07:52.593 --> 07:54.771
+What happens then is basically
+
+07:54.772 --> 07:59.040
+only the sub object is assigned
+
+07:59.041 --> 08:03.204
+and the rest of the derived is lost.
+
+08:03.205 --> 08:06.953
+So this is also called slicing down.
+
+08:06.954 --> 08:10.209
+Of course this can be very dangerous,
+
+08:10.210 --> 08:14.554
+because all parts that are not in the base class,
+
+08:14.555 --> 08:23.669
+all member functions, all data is lost after the assignment
+
+08:23.670 --> 08:31.177
+So how happens the conversion from derived to base?
+
+08:31.178 --> 08:34.921
+So when you call a base class copy constructor
+
+08:34.922 --> 08:38.452
+or assignment operator on an object of type
+
+08:38.453 --> 08:42.617
+derrived class, then first the derived class object
+
+08:42.618 --> 08:46.438
+is converted to a reference to base class.
+
+08:46.439 --> 08:50.551
+That means only that a base class reference
+
+08:50.552 --> 08:54.076
+is bound to the derived class object.
+
+08:54.077 --> 08:57.646
+Then this reference is passed as an argument
+
+08:57.647 --> 09:01.789
+to the copy constructor or assignment operator.
+
+09:01.790 --> 09:08.002
+After that those operators use the base class part
+
+09:08.003 --> 09:11.784
+of the derived class to initialize the members
+
+09:11.785 --> 09:13.389
+of the base class,
+
+09:13.390 --> 09:16.485
+on which the constructor was called.
+
+09:16.486 --> 09:19.703
+And then last step once the operator completes,
+
+09:19.704 --> 09:22.102
+the object is a base class.
+
+09:22.103 --> 09:25.600
+Now it contains a copy of the base class part
+
+09:25.601 --> 09:27.229
+of the derived class,
+
+09:27.230 --> 09:31.322
+from which it was initialized but the derived class part
+
+09:31.323 --> 09:34.117
+of the argument is ignored.
+
+09:34.118 --> 09:41.703
+So, exactly as I have mentioned before.
+
+09:41.704 --> 09:44.520
+Then towards polymorphism.
+
+09:44.521 --> 09:47.324
+So, you have these virtual functions.
+
+09:47.325 --> 09:51.822
+These are also regular member functions,
+
+09:51.823 --> 09:55.917
+but they now define type specific behavior.
+
+09:55.918 --> 10:01.268
+If you call such a virtual function through a reference
+
+10:01.269 --> 10:07.815
+or a pointer, then they are resolved at runtime
+
+10:07.816 --> 10:13.347
+and of course they can have a dynamic type.
+
+10:13.348 --> 10:19.670
+And if this dynamic type differs from the static type,
+
+10:19.671 --> 10:24.002
+then you also will result in a call,
+
+10:24.003 --> 10:32.144
+that realizes the dynamic polymorphism.
+
+10:32.145 --> 10:38.197
+Again the dynamic type is a type at runtime
+
+10:38.198 --> 10:40.975
+and the static type is the compile time type
+
+10:40.976 --> 10:44.122
+So this is what you basically have to write down.
+
+10:44.123 --> 10:47.960
+And when the compiler runs at compile time,
+
+10:47.961 --> 10:57.675
+this is the type that the compiler assumes for your object
+
+10:57.676 --> 11:03.788
+What else do you have?
+
+11:03.789 --> 11:09.879
+You have the possibility to define pure virtual functions
+
+11:09.880 --> 11:13.868
+this is basically a virtual function
+
+11:13.869 --> 11:17.546
+that you then do not implement.
+
+11:17.547 --> 11:19.090
+So the function body is missing,
+
+11:19.091 --> 11:21.674
+but you just write "= 0"
+
+11:21.675 --> 11:25.648
+at the end of the functions parameter list.
+
+11:25.649 --> 11:31.419
+And that results then in an abstract base class,
+
+11:31.420 --> 11:34.957
+because the implementation is missing
+
+11:34.958 --> 11:36.436
+of this function.
+
+11:36.437 --> 11:43.404
+You also cannot create an object of this class
+
+11:43.405 --> 11:50.778
+and that means it becomes an abstract base class.
+
+11:50.779 --> 11:55.004
+They are used basically to define interfaces.
+
+11:55.005 --> 11:58.605
+So, they are very important
+
+11:58.606 --> 12:03.299
+and if you derive then from this abstract base class,
+
+12:03.300 --> 12:09.879
+in the derived class you can complete the type
+
+12:09.880 --> 12:14.586
+by basically implementing your pure virtual function
+
+12:14.587 --> 12:19.970
+and then of course you can create objects of that type
+
+12:19.971 --> 12:27.417
+and you can also use dynamic polymorphism.
+
+12:27.418 --> 12:32.125
+Last thing I want to mention in this context
+
+12:32.126 --> 12:33.919
+are virtual destructors.
+
+12:33.920 --> 12:38.031
+So basically a derived class destructor
+
+12:38.032 --> 12:43.726
+automatically invokes the base class destructor
+
+12:43.727 --> 12:47.790
+and the root class of an inheritance hierarchy
+
+12:47.791 --> 12:51.000
+should define a virtual destructor.
+
+12:51.001 --> 12:55.140
+Why? Because then you assure a proper deleting
+
+12:55.141 --> 12:57.006
+of your pointer members,
+
+12:57.007 --> 13:01.414
+because depending on the dynamic type
+
+13:01.415 --> 13:05.638
+the right destructor and then also in the right order
+
+13:05.639 --> 13:10.477
+in your class hierarchy is called.
+
+13:10.478 --> 13:11.980
+So if a virtual is called
+
+13:11.981 --> 13:15.679
+from inside a constructor or a destructor,
+
+13:15.680 --> 13:18.666
+it runs the version defined for the type
+
+13:18.667 --> 13:23.030
+of the constructor or destructor itself.
+
+13:23.031 --> 13:26.264
+So this is a very crucial rule.
+
+13:26.265 --> 13:33.398
+Always define the destructor of your base class as virtual!
+
+13:33.399 --> 13:37.942
+[Music]

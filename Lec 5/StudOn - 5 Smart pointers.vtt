@@ -1,0 +1,724 @@
+WEBVTT
+
+00:01.331 --> 00:08.141
+[Music]
+
+00:16.363 --> 00:18.498
+Now we will talk a little bit about
+
+00:18.499 --> 00:20.281
+dynamic memory management
+
+00:20.282 --> 00:24.510
+and smart pointers.
+
+00:24.511 --> 00:26.180
+So first of all I want to start
+
+00:26.181 --> 00:33.320
+with the most important idiom in C++,
+
+00:33.321 --> 00:38.113
+if you want to work with resources.
+
+00:38.114 --> 00:41.433
+This the so-called RAII idiom.
+
+00:41.434 --> 00:46.901
+So that means: resource acquisition is initialization,
+
+00:46.902 --> 00:52.938
+You have very many realizations in C++ of this idiom.
+
+00:52.939 --> 00:55.818
+One of them is a smart pointer.
+
+00:55.819 --> 01:00.041
+We will talk later about it,
+
+01:00.042 --> 01:04.842
+but first of all I want to show you the concept.
+
+01:04.843 --> 01:08.060
+So it's not very difficult.
+
+01:08.061 --> 01:12.157
+Assume you want to work with a new resource.
+
+01:12.158 --> 01:16.280
+So there is one example:
+
+01:16.281 --> 01:20.241
+You want to work with dynamic memory.
+
+01:20.242 --> 01:26.117
+Another example would be to work with a file, for example
+
+01:26.118 --> 01:29.833
+And what you want to do then is:
+
+01:29.834 --> 01:34.502
+You want to define a class.
+
+01:34.503 --> 01:38.449
+Inside this class you have a lot of members,
+
+01:38.450 --> 01:42.401
+let's say you have dynamic memory,
+
+01:42.402 --> 01:44.777
+you have there a pointer member
+
+01:44.778 --> 01:49.520
+and then at some point you want to allocate
+
+01:49.521 --> 01:54.498
+the memory and how and where to do that:
+
+01:54.499 --> 01:57.402
+in the constructor.
+
+01:57.403 --> 02:01.502
+So you see here in the public part of the constructor
+
+02:01.503 --> 02:03.885
+you obtain the resource.
+
+02:03.886 --> 02:10.958
+So you write a now "new" and after that you can use
+
+02:10.959 --> 02:15.884
+the resource or the memory inside your class
+
+02:15.885 --> 02:21.000
+and at the end when you want to release your resource
+
+02:21.001 --> 02:23.901
+free your memory in the destructor,
+
+02:23.902 --> 02:27.120
+you basically write the "delete".
+
+02:27.121 --> 02:33.220
+And this very basic principle is the RAII idom.
+
+02:33.221 --> 02:36.260
+So in the constructor you allocate,
+
+02:36.261 --> 02:45.013
+in the destructor you deallocate or free.
+
+02:45.014 --> 02:49.398
+Now why is it in principle a problem?
+
+02:49.399 --> 02:52.764
+because if you have dynamic memory,
+
+02:52.765 --> 02:57.453
+then the managing is very error-prone.
+
+02:57.454 --> 03:00.078
+It can happen, if you do not follow strictly
+
+03:00.079 --> 03:03.483
+this RAII idiom, that you have a memory leak,
+
+03:03.484 --> 03:05.708
+because you have a pointer,
+
+03:05.709 --> 03:09.821
+you allocated with "new" some memory,
+
+03:09.822 --> 03:15.117
+but you just forget to write the corresponding delete.
+
+03:15.118 --> 03:17.213
+Then you have a memory leak.
+
+03:17.214 --> 03:21.596
+It can also happen that you delete
+
+03:21.597 --> 03:25.656
+and afterwards you again try to read or write
+
+03:25.657 --> 03:30.238
+to the object, so of course this is also an error.
+
+03:30.239 --> 03:36.634
+Or you just try to delete a memory location twice.
+
+03:36.635 --> 03:39.925
+All of these things cannot happen,
+
+03:39.926 --> 03:46.894
+if you strictly follow the RAII idiom.
+
+03:46.895 --> 03:50.895
+Here again the definitions of the operators,
+
+03:50.896 --> 03:52.300
+that you need,
+
+03:52.301 --> 03:55.037
+so the new and the delete operator.
+
+03:55.038 --> 03:58.524
+The delete operator is a library function,
+
+03:58.525 --> 04:04.738
+that of course frees untyped unconstructed memory,
+
+04:04.739 --> 04:08.306
+that was allocated by the operator "new" before.
+
+04:08.307 --> 04:11.638
+You have also the array versions
+
+04:11.639 --> 04:16.723
+of "delete" and "new", if you need them.
+
+04:16.724 --> 04:19.987
+And the operator "new" is a library function,
+
+04:19.988 --> 04:23.430
+that allocates untyped unconstructed memory
+
+04:23.431 --> 04:26.813
+of a given size.
+
+04:26.814 --> 04:30.260
+So that means, you get raw memory
+
+04:30.261 --> 04:32.616
+for arrays, for example if you use
+
+04:32.617 --> 04:37.264
+the array version of it.
+
+04:37.265 --> 04:40.392
+These library functions provide a more primitive
+
+04:40.393 --> 04:42.293
+allocation mechanism
+
+04:42.294 --> 04:44.917
+than the library allocator class
+
+04:44.918 --> 04:51.574
+that will be on the next slide.
+
+04:51.575 --> 04:56.577
+And typically, if you want to write a modern C++ program,
+
+04:56.578 --> 05:00.023
+you should use the allocator classes
+
+05:00.024 --> 05:06.679
+rather than these low-level library functions.
+
+05:06.680 --> 05:13.367
+What is now the standard library allocator class?
+
+05:13.368 --> 05:14.970
+This is basically a class,
+
+05:14.971 --> 05:21.335
+that also allocates unconstructed memory
+
+05:21.336 --> 05:27.443
+and if one uses now "new" the memory is allocated
+
+05:27.444 --> 05:31.391
+and the objects are constructed in that memory.
+
+05:31.392 --> 05:32.884
+So you get both,
+
+05:32.885 --> 05:35.324
+you get allocation
+
+05:35.325 --> 05:42.344
+and construction of the objects.
+
+05:42.345 --> 05:45.572
+When you allocate a block of memory,
+
+05:45.573 --> 05:48.988
+then one often plans to construct objects
+
+05:48.989 --> 05:53.104
+in that memory later when needed
+
+05:53.105 --> 05:57.292
+and the standard library allocator class allows you that.
+
+05:57.293 --> 06:01.837
+So you can basically decouple the construction
+
+06:01.838 --> 06:04.053
+from the allocation.
+
+06:04.054 --> 06:12.344
+So again, first you say I want to allocate 500 bytes,
+
+06:12.345 --> 06:14.571
+but you do not specify
+
+06:14.572 --> 06:18.563
+that later on maybe you want to construct
+
+06:18.564 --> 06:23.070
+strings inside these 500 bytes.
+
+06:23.071 --> 06:26.378
+And the allocator class allows you to do that.
+
+06:26.379 --> 06:30.322
+So in the first step allocate the memory
+
+06:30.323 --> 06:32.760
+and in the second step later,
+
+06:32.761 --> 06:35.672
+you can then create the objects,
+
+06:35.673 --> 06:38.235
+that means you call the constructor
+
+06:38.236 --> 06:41.996
+and then really get an object
+
+06:41.997 --> 06:45.320
+in that memory location.
+
+06:45.321 --> 06:53.493
+The classical "new" does both things at the same time.
+
+06:53.494 --> 07:01.840
+Then you have member operators "new" and "delete".
+
+07:01.841 --> 07:05.630
+They are classical class member functions,
+
+07:05.631 --> 07:07.818
+that allow you to overwrite
+
+07:07.819 --> 07:11.854
+the default memory allocation, that is performed,
+
+07:11.855 --> 07:19.175
+by the global library operator new and operator delete functions.
+
+07:19.176 --> 07:22.498
+And you can also of course overload
+
+07:22.499 --> 07:28.926
+not only the usual "new", but also the array form.
+
+07:28.927 --> 07:32.144
+This member "new" and "delete" functions are implicitly
+
+07:32.145 --> 07:35.587
+declared as static.
+
+07:35.588 --> 07:40.628
+What they do is they allocate or deallocate the memory
+
+07:40.629 --> 07:42.769
+and they are also used automatically
+
+07:42.770 --> 07:45.490
+by "new" or "delete" expressions.
+
+07:45.491 --> 07:51.974
+So that means for your own class types,
+
+07:51.975 --> 08:01.248
+you can also overload these two, "new" and "delete" functions.
+
+08:01.249 --> 08:04.929
+And now, what do you need in addition
+
+08:04.930 --> 08:07.501
+to the classical "new" and "delete".
+
+08:07.502 --> 08:13.198
+when you look at these allocator classes,
+
+08:13.199 --> 08:20.151
+you have then a third form of new expression
+
+08:20.152 --> 08:24.332
+and this is the so-called placement new expression.
+
+08:24.333 --> 08:26.307
+This is used by the allocator,
+
+08:26.308 --> 08:32.567
+basically to say, I have already allocated
+
+08:32.568 --> 08:36.718
+my memory, but now within this memory
+
+08:36.719 --> 08:42.002
+I want to construct a certain object.
+
+08:42.003 --> 08:47.753
+So you see it here in the last line "new (sp)".
+
+08:47.754 --> 08:52.179
+"sp" is basically the memory location,
+
+08:52.180 --> 08:55.334
+that you have allocated before.
+
+08:55.335 --> 08:58.370
+And then you have the string.
+
+08:58.371 --> 09:03.611
+This is what you want to construct, a string
+
+09:03.612 --> 09:07.729
+and "begin", "end", these is just
+
+09:07.730 --> 09:13.852
+an iterator interval, that tells you,
+
+09:13.853 --> 09:16.321
+how many elements, for example,
+
+09:16.322 --> 09:21.130
+you want to allocate.
+
+09:21.131 --> 09:27.194
+This is an example how these allocator classes
+
+09:27.195 --> 09:33.870
+can be used.
+
+09:33.871 --> 09:41.665
+Now general thing about the management of pointer members.
+
+09:41.666 --> 09:45.509
+So I have said we have this
+
+09:45.510 --> 09:50.466
+RAII idiom, we have pointer members,
+
+09:50.467 --> 09:54.573
+but in general it is a problem,
+
+09:54.574 --> 09:58.960
+what you do when you copy classes,
+
+09:58.961 --> 10:02.033
+that have a pointer member.
+
+10:02.034 --> 10:05.046
+And now there are several possibilities:
+
+10:05.047 --> 10:10.425
+you can follow the approach, that the pointer member has
+
+10:10.426 --> 10:14.400
+normal pointer like behavior.
+
+10:14.401 --> 10:19.520
+This means you just copy the pointer and that's it.
+
+10:19.521 --> 10:26.202
+So you have no special copy control.
+
+10:26.203 --> 10:32.066
+The second option is that you have value like behavior,
+
+10:32.067 --> 10:35.703
+that means the object, to which the pointer points,
+
+10:35.704 --> 10:39.130
+will be unique and managed separately
+
+10:39.131 --> 10:41.389
+by each class object.
+
+10:41.390 --> 10:46.187
+So whenever you copy your class,
+
+10:46.188 --> 10:50.764
+then also the memory, the pointer points to,
+
+10:50.765 --> 10:54.288
+is completely copied.
+
+10:54.289 --> 10:57.497
+Of course if you have pointers,
+
+10:57.498 --> 11:06.112
+that point to large objects, so many bytes in memory,
+
+11:06.113 --> 11:11.276
+then this can be performance critical,
+
+11:11.277 --> 11:18.956
+or you have a lot of memory requirement.
+
+11:18.957 --> 11:24.886
+And the third option is you use smart pointer behavior.
+
+11:24.887 --> 11:26.755
+So what does that mean?
+
+11:26.756 --> 11:29.166
+This means that the object to which
+
+11:29.167 --> 11:33.430
+the pointer points is shared
+
+11:33.431 --> 11:39.281
+and the class itself manages the pointer
+
+11:39.282 --> 11:43.681
+and also knows how many pointers point
+
+11:43.682 --> 11:45.908
+to that memory location
+
+11:45.909 --> 11:50.133
+and also for example prevents dangling pointers.
+
+11:50.134 --> 11:52.612
+That's the reason why it's called smart pointer,
+
+11:52.613 --> 12:00.985
+because there is some bookkeeping necessary.
+
+12:00.986 --> 12:07.765
+Let's briefly summarize again the value semantics.
+
+12:07.766 --> 12:13.229
+So when you have value semantics,
+
+12:13.230 --> 12:16.071
+then you basically mimic the way
+
+12:16.072 --> 12:19.131
+arithmetic types are copied.
+
+12:19.132 --> 12:22.810
+That means copies of value like objects are independent.
+
+12:22.811 --> 12:29.593
+If you change one of the two objects after copying,
+
+12:29.594 --> 12:32.204
+then this has no effect to the original one,
+
+12:32.205 --> 12:35.963
+to the other one.
+
+12:35.964 --> 12:39.089
+If you have a value like class,
+
+12:39.090 --> 12:42.953
+that has pointer members, then you must define
+
+12:42.954 --> 12:46.771
+its own copy control members.
+
+12:46.772 --> 12:49.949
+And the copy control operations just copy the object
+
+12:49.950 --> 12:53.154
+to which the pointer points.
+
+12:53.155 --> 12:54.618
+So value like classes,
+
+12:54.619 --> 12:58.429
+that contain only other value like classes
+
+12:58.430 --> 13:01.318
+or just usual built-in types,
+
+13:01.319 --> 13:08.447
+they can often rely on the synthesized copy control members,
+
+13:08.448 --> 13:12.418
+because they do exactly this.
+
+13:12.419 --> 13:17.017
+In contrast to that the smart pointer
+
+13:17.018 --> 13:19.212
+behaves like a pointer,
+
+13:19.213 --> 13:22.575
+but adds additional functionality.
+
+13:22.576 --> 13:26.773
+One common form of the smart pointer
+
+13:26.774 --> 13:31.138
+just takes a pointer to a dynamically allocated object
+
+13:31.139 --> 13:33.821
+and assumes the responsibility
+
+13:33.822 --> 13:36.707
+for deleting that object.
+
+13:36.708 --> 13:39.876
+So the user allocates the object,
+
+13:39.877 --> 13:42.830
+but the smart pointer class deletes it.
+
+13:42.831 --> 13:46.884
+And it deletes it and at the time,
+
+13:46.885 --> 13:49.917
+when no other pointer is pointing
+
+13:49.918 --> 13:52.837
+to this memory location.
+
+13:52.838 --> 13:54.673
+In order to do that of course
+
+13:54.674 --> 13:57.504
+the smart pointer class requires,
+
+13:57.505 --> 14:01.043
+that the class implements the copy control members,
+
+14:01.044 --> 14:07.589
+to manage the pointer, or the shared object.
+
+14:07.590 --> 14:13.369
+And the object is now, as I have said, deleted only,
+
+14:13.370 --> 14:18.462
+when the last smart pointer pointing to it is destroyed.
+
+14:18.463 --> 14:22.341
+Internally this is very often realized
+
+14:22.342 --> 14:26.247
+by use counting.
+
+14:26.248 --> 14:31.573
+Use counting is a specific programming technique,
+
+14:31.574 --> 14:35.249
+that stores a use count variable
+
+14:35.250 --> 14:38.238
+along with the shared object
+
+14:38.239 --> 14:42.360
+and then a separate class is created,
+
+14:42.361 --> 14:47.988
+that points to the shared object and manages the use count.
+
+14:47.989 --> 14:52.796
+And the constructors, other than the copy constructor,
+
+14:52.797 --> 14:55.427
+set the state of the shared object
+
+14:55.428 --> 15:01.456
+and also set the use count to one.
+
+15:01.457 --> 15:06.190
+And now each time new copy is made,
+
+15:06.191 --> 15:10.184
+either in the copy constructor or the assignment operator
+
+15:10.185 --> 15:13.580
+you also increment the use count.
+
+15:13.581 --> 15:16.084
+And when you destroy an object,
+
+15:16.085 --> 15:20.163
+then, for example, in the destructor
+
+15:20.164 --> 15:23.321
+or in the assignment operator
+
+15:23.322 --> 15:27.659
+you decrement the use count.
+
+15:27.660 --> 15:29.537
+So that means the assignment operator
+
+15:29.538 --> 15:35.945
+and the destructor check whether the decremented use count
+
+15:35.946 --> 15:39.193
+is now zero and if it is zero,
+
+15:39.194 --> 15:48.405
+they also handling the destruction of the object.
+
+15:48.406 --> 15:52.974
+These smart pointers are also included
+
+15:52.975 --> 15:54.825
+in the standard library.
+
+15:54.826 --> 15:58.230
+So there are different versions of smart pointers,
+
+15:58.231 --> 16:04.698
+as we will see in our example codes.
+
+16:04.699 --> 16:07.277
+There are the shared pointers,
+
+16:07.278 --> 16:11.252
+that allow multiple pointers to refer to the same object.
+
+16:11.253 --> 16:16.365
+So this is the standard smart pointer.
+
+16:16.366 --> 16:21.564
+In the example you define a shared pointer to integer,
+
+16:21.565 --> 16:26.099
+named "pi" and you initialize it
+
+16:26.100 --> 16:31.940
+by an integer pointer that you create by "new".
+
+16:31.941 --> 16:36.020
+This is the classical shared pointer.
+
+16:36.021 --> 16:39.239
+And then there is also the unique pointer,
+
+16:39.240 --> 16:42.092
+that owns the object which it points
+
+16:42.093 --> 16:45.591
+and the weak pointer, that does not control
+
+16:45.592 --> 16:50.935
+the lifetime of the object to which it points.
+
+16:50.936 --> 16:54.307
+There are special cases,
+
+16:54.308 --> 16:58.181
+where these two have to be used,
+
+16:58.182 --> 17:00.671
+or should be used, as we will see
+
+17:00.672 --> 17:02.793
+in our examples
+
+17:02.794 --> 17:08.036
+[Music]

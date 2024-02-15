@@ -1,0 +1,547 @@
+WEBVTT
+
+00:01.320 --> 00:06.235
+[Music]
+
+00:06.981 --> 00:10.854
+The next topic is templates.
+
+00:10.855 --> 00:16.002
+Templates is one way to realize
+
+00:16.003 --> 00:20.285
+static polymorphism in C++.
+
+00:20.286 --> 00:24.624
+This is in contrast to dynamic polymorphism.
+
+00:24.625 --> 00:28.454
+Templates allow you to use
+
+00:28.455 --> 00:33.747
+generic types, as you, for example do it with the containers,
+
+00:33.748 --> 00:39.203
+you can define a vector of a certain type
+
+00:39.204 --> 00:42.811
+and at compile time you can basically choose,
+
+00:42.812 --> 00:44.546
+which one you want to use.
+
+00:44.547 --> 00:48.251
+So this is the polymorphism at compile time,
+
+00:48.252 --> 00:51.679
+or also static polymorphism.
+
+00:51.680 --> 00:54.775
+And there are two kinds of templates.
+
+00:54.776 --> 00:58.312
+So you have the class templates and the function templates.
+
+00:58.313 --> 01:01.895
+Here you see two examples:
+
+01:01.896 --> 01:05.634
+first defines a class "MyClass" that has
+
+01:05.635 --> 01:10.284
+two template parameters and the second
+
+01:10.285 --> 01:17.218
+is a function "print", that has one template parameter.
+
+01:17.219 --> 01:20.434
+The interesting thing is, for example,
+
+01:20.435 --> 01:25.581
+now you can use the "print" function on different types,
+
+01:25.582 --> 01:28.063
+so you can print a string,
+
+01:28.064 --> 01:30.453
+you can print an integer,
+
+01:30.454 --> 01:33.833
+you can print your own class type
+
+01:33.834 --> 01:35.790
+and you only have to implement
+
+01:35.791 --> 01:40.646
+one print function for that.
+
+01:40.647 --> 01:45.793
+The template parameter is basically the name.
+
+01:45.794 --> 01:49.580
+This is analog to the function parameter,
+
+01:49.581 --> 01:54.433
+that is specified in the template parameter list.
+
+01:54.434 --> 01:56.990
+And this name you can also use
+
+01:56.991 --> 02:00.183
+inside the definition of a template.
+
+02:00.184 --> 02:04.031
+There are two types of parameters.
+
+02:04.032 --> 02:10.482
+They can be type or non type template parameters.
+
+02:10.483 --> 02:15.586
+If you want to use a class template,
+
+02:15.587 --> 02:20.839
+you must specify actual arguments
+
+02:20.840 --> 02:23.105
+for each template parameter.
+
+02:23.106 --> 02:28.438
+So that means at compile time the compiler has to know
+
+02:28.439 --> 02:31.958
+which concrete type you want to insert
+
+02:31.959 --> 02:33.867
+for the template parameter
+
+02:33.868 --> 02:39.758
+in order to instantiate an object of the class type.
+
+02:39.759 --> 02:41.870
+When you use a function template,
+
+02:41.871 --> 02:45.147
+then the compiler deduces the template arguments
+
+02:45.148 --> 02:48.034
+from the arguments in the call
+
+02:48.035 --> 02:52.093
+and instantiates this specific function
+
+02:52.094 --> 02:57.206
+using these template arguments.
+
+02:57.207 --> 03:03.358
+Now if you take a closer look at the non type parameters,
+
+03:03.359 --> 03:08.294
+then they basically represent a value.
+
+03:08.295 --> 03:12.869
+So when a function template is instantiated,
+
+03:12.870 --> 03:15.632
+then each non type parameter
+
+03:15.633 --> 03:19.130
+is bound to a constant expression.
+
+03:19.131 --> 03:22.638
+As it is indicated by the arguments,
+
+03:22.639 --> 03:24.831
+that you use in the call.
+
+03:24.832 --> 03:28.533
+And when a class template is instantiated,
+
+03:28.534 --> 03:32.967
+then each non type parameter is bound to a constant expression,
+
+03:32.968 --> 03:35.101
+as indicated by the arguments used
+
+03:35.102 --> 03:38.312
+in the class instantiation.
+
+03:38.313 --> 03:40.639
+So this holds for non type parameters.
+
+03:40.640 --> 03:45.260
+The type parameters, this is a name used
+
+03:45.261 --> 03:47.340
+in the template parameter list,
+
+03:47.341 --> 03:50.271
+to represent a type of course,
+
+03:50.272 --> 03:53.671
+when you then instantiate the template,
+
+03:53.672 --> 03:57.810
+then each type parameter is bound to an actual type.
+
+03:57.811 --> 04:02.071
+In a function template these types are inferred
+
+04:02.072 --> 04:04.261
+from the arguments,
+
+04:04.262 --> 04:08.467
+or can also be explicitly specified in the call.
+
+04:08.468 --> 04:11.401
+And the type arguments must,
+
+04:11.402 --> 04:16.970
+as I have said already, be specified for a class template,
+
+04:16.971 --> 04:23.163
+when you use the class template.
+
+04:23.164 --> 04:26.332
+The template parameter list is now defined
+
+04:26.333 --> 04:29.041
+to be a list of type or non-type parameters
+
+04:29.042 --> 04:30.410
+separated by commas.
+
+04:30.411 --> 04:35.611
+So this is exactly analog to the function parameter list.
+
+04:35.612 --> 04:38.598
+And also the template argument is analog
+
+04:38.599 --> 04:40.299
+to the function argument,
+
+04:40.300 --> 04:43.197
+now a type or a value specified,
+
+04:43.198 --> 04:45.718
+when using a template type,
+
+04:45.719 --> 04:53.588
+such as when defining an object or naming a type in a cast.
+
+04:53.589 --> 04:56.775
+This hint in the last line
+
+04:56.776 --> 05:04.844
+addresses the requirements for these argument types.
+
+05:04.845 --> 05:10.245
+Of course inside of for example the function template,
+
+05:10.246 --> 05:16.089
+when you use then the template argument,
+
+05:16.090 --> 05:18.761
+then for example,
+
+05:18.762 --> 05:22.718
+if you use an operator on it
+
+05:22.719 --> 05:27.763
+then the type must support this operator,
+
+05:27.764 --> 05:31.586
+otherwise it will not work
+
+05:31.587 --> 05:34.429
+and you should really be sure,
+
+05:34.430 --> 05:39.923
+that you only use types that fulfill these requirements
+
+05:39.924 --> 05:43.481
+and on the other hand you should not put
+
+05:43.482 --> 05:45.842
+too many requirements on it,
+
+05:45.843 --> 05:56.144
+otherwise you restrict the possible parameter types.
+
+05:56.145 --> 05:59.453
+Some word about the "typename" keyword.
+
+05:59.454 --> 06:07.627
+It's in principle in the parameter list equivalent to class.
+
+06:07.628 --> 06:10.327
+If there is any doubt,
+
+06:10.328 --> 06:13.900
+whether the type name is necessary or not,
+
+06:13.901 --> 06:17.054
+to indicate that a name is a type,
+
+06:17.055 --> 06:21.479
+then it is usually a good idea to specify it.
+
+06:21.480 --> 06:26.288
+In principle before any type in the source code
+
+06:26.289 --> 06:30.285
+you can also write "typename" and then the type.
+
+06:30.286 --> 06:37.698
+So it just indicates that the next token is the type.
+
+06:37.699 --> 06:40.911
+So then about template instantiation.
+
+06:40.912 --> 06:42.286
+What is it?
+
+06:42.287 --> 06:45.521
+It is a compiler process,
+
+06:45.522 --> 06:48.916
+where the actual template arguments are used
+
+06:48.917 --> 06:53.267
+to generate a specific instance of the template,
+
+06:53.268 --> 06:55.779
+in which the parameters are replaced
+
+06:55.780 --> 06:58.719
+by the corresponding arguments.
+
+06:58.720 --> 07:03.229
+So for functions they are instantiated automatically,
+
+07:03.230 --> 07:07.572
+based on the arguments used in a call.
+
+07:07.573 --> 07:11.603
+Again template arguments must be provided explicitly,
+
+07:11.604 --> 07:16.218
+whenever a class template is used.
+
+07:16.219 --> 07:17.778
+And also remember,
+
+07:17.779 --> 07:21.299
+that each instantiation of a class template
+
+07:21.300 --> 07:24.372
+constitutes an independent class type.
+
+07:24.373 --> 07:27.342
+So that means, as an example,
+
+07:27.343 --> 07:30.729
+you have a vector, then a "vector&lt;int&gt;"
+
+07:30.730 --> 07:33.628
+and a "vector&lt;double&gt;" and a "vector&lt;string&gt;
+
+07:33.629 --> 07:41.016
+are three different independent class types.
+
+07:41.017 --> 07:44.362
+How does the template argument deduction work?
+
+07:44.363 --> 07:47.281
+So first of all this is the process,
+
+07:47.282 --> 07:50.039
+by which the compiler determines,
+
+07:50.040 --> 07:53.960
+which function template to instantiate.
+
+07:53.961 --> 07:56.525
+So the compiler examines the types
+
+07:56.526 --> 07:58.141
+of the arguments,
+
+07:58.142 --> 08:01.649
+that were specified using a template parameter
+
+08:01.650 --> 08:06.038
+and it automatically instantiates a version of the function,
+
+08:06.039 --> 08:12.322
+with those types of values bound to the template parameters.
+
+08:12.323 --> 08:17.533
+It's similar to the things that happen,
+
+08:17.534 --> 08:20.797
+when you call a function,
+
+08:20.798 --> 08:26.170
+but there is one really big difference
+
+08:26.171 --> 08:31.393
+and this is that you have only very limited conversion
+
+08:31.394 --> 08:34.659
+in contrast to classical functions.
+
+08:34.660 --> 08:39.354
+So in principle you can say that the parameter types
+
+08:39.355 --> 08:44.890
+and the arguments must match exactly.
+
+08:44.891 --> 08:49.449
+There are very limited exceptions.
+
+08:49.450 --> 08:52.423
+So first of all "const" or "non-const"
+
+08:52.424 --> 08:54.936
+conversions can be done
+
+08:54.937 --> 08:57.658
+and array or function pointer
+
+08:57.659 --> 08:59.278
+conversions can be done,
+
+08:59.279 --> 09:05.136
+but as said, usually you should not expect,
+
+09:05.137 --> 09:09.403
+that conversions work
+
+09:09.404 --> 09:12.687
+in the same way as when you call a function:
+
+09:12.688 --> 09:15.725
+like you have an integer parameter in a function
+
+09:15.726 --> 09:17.313
+and you pass a double to it.
+
+09:17.314 --> 09:23.817
+So this will not work for templates.
+
+09:23.818 --> 09:28.832
+So when the address of a function template instantiation is taken,
+
+09:28.833 --> 09:31.400
+then the context must be such,
+
+09:31.401 --> 09:34.623
+that it allows a unique type of value
+
+09:34.624 --> 09:38.117
+to be determined for each template parameter.
+
+09:38.118 --> 09:43.192
+That's summary of that.
+
+09:43.193 --> 09:47.623
+Now there are also specific templates.
+
+09:47.624 --> 09:51.247
+The so called variadic templates.
+
+09:51.248 --> 09:56.570
+They allow you to have an arbitrary
+
+09:56.571 --> 10:01.818
+and varying number of parameters for your template.
+
+10:01.819 --> 10:05.881
+They also have specific syntax that you see here:
+
+10:05.882 --> 10:08.432
+So you have "typename T" here
+
+10:08.433 --> 10:12.749
+and then the "typename ... Args" and that means,
+
+10:12.750 --> 10:17.816
+that here you can provide an arbitrary number
+
+10:17.817 --> 10:20.827
+of template arguments.
+
+10:20.828 --> 10:26.225
+So in the coding examples we will see,
+
+10:26.226 --> 10:29.349
+how you can work with this.
+
+10:29.399 --> 10:37.507
+The next point I want to address are type traits.
+
+10:37.508 --> 10:44.366
+The type traits are included in the standard library
+
+10:44.367 --> 10:49.603
+and they are special classes
+
+10:49.604 --> 10:53.227
+that implement a trait.
+
+10:53.228 --> 10:54.071
+What is the trait?
+
+10:54.072 --> 10:58.698
+It is just a distinguishing quality or characteristic
+
+10:58.699 --> 11:07.718
+and it allows you to take decisions,
+
+11:07.719 --> 11:12.034
+that you base on the types at compile time.
+
+11:12.035 --> 11:18.099
+So you have for example the possibility to check
+
+11:18.100 --> 11:23.930
+if your template argument is an integral type,
+
+11:23.931 --> 11:25.916
+or is a pointer type, is a reference,
+
+11:25.917 --> 11:35.193
+is an object, is a const, or unsigned, or is the same,
+
+11:35.194 --> 11:41.936
+So if two template parameter types are the same or not.
+
+11:41.937 --> 11:46.062
+And you can even modify your types.
+
+11:46.063 --> 11:51.939
+So you can remove the const from your template,
+
+11:51.940 --> 11:54.592
+you can remove the reference,
+
+11:54.593 --> 12:02.282
+or you also add something like const.
+
+12:02.283 --> 12:07.237
+Or more general transformations you can enable something,
+
+12:07.238 --> 12:10.737
+if a condition is fulfilled.
+
+12:10.738 --> 12:19.302
+So these type traits allow you to control your types,
+
+12:19.303 --> 12:24.147
+that you get from the user basically
+
+12:24.148 --> 12:30.133
+and to make your code more robust
+
+12:30.134 --> 12:35.714
+[Music]

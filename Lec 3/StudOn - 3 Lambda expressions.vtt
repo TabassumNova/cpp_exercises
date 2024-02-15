@@ -1,0 +1,379 @@
+WEBVTT
+
+00:01.290 --> 00:08.383
+[Music]
+
+00:13.806 --> 00:16.450
+Welcome to the next session.
+
+00:16.451 --> 00:19.906
+Now we will talk about lambda expressions.
+
+00:19.907 --> 00:26.163
+Lambda expressions are used for functional programming.
+
+00:26.164 --> 00:33.041
+So a lambda function is basically an unknown function
+
+00:33.042 --> 00:38.167
+This kind of function you can define like this.
+
+00:38.168 --> 00:41.530
+So you have "auto f",
+
+00:41.531 --> 00:47.117
+"f" should be the lambda function, equals,
+
+00:47.118 --> 00:51.209
+and now you have the so called capture list.
+
+00:51.210 --> 00:55.623
+In this capture list you can capture,
+
+00:55.624 --> 00:58.964
+for example variables, from the surrounding scope,
+
+00:58.965 --> 01:03.512
+that you want to use inside the lambda function.
+
+01:03.513 --> 01:08.010
+Then you have the normal parameter list.
+
+01:08.011 --> 01:11.244
+So let's say an integer parameter "i".
+
+01:11.245 --> 01:13.971
+So this is a function,
+
+01:13.972 --> 01:19.437
+where you can pass an integer argument to.
+
+01:19.438 --> 01:26.563
+Then you have a new syntax for the return type.
+
+01:26.564 --> 01:30.333
+This is the arrow. And then you for example
+
+01:30.334 --> 01:31.916
+specify here "int".
+
+01:31.917 --> 01:35.039
+So the function returns an integer
+
+01:35.040 --> 01:40.728
+And then follows the function body
+
+01:40.729 --> 01:45.478
+and here you can say, like, return "i".
+
+01:45.479 --> 01:53.080
+So this would define you now a lambda function f,
+
+01:53.081 --> 01:57.388
+taking an integer argument, returning an integer.
+
+01:57.389 --> 02:03.051
+And what it does it just returns, what it gets.
+
+02:03.052 --> 02:05.955
+Why do I use "auto" here,
+
+02:05.956 --> 02:11.541
+because the type of such lambda changes.
+
+02:11.542 --> 02:15.024
+So the compiler generates specific type
+
+02:15.025 --> 02:18.396
+for each lambda function
+
+02:18.397 --> 02:21.734
+and so you must use "auto" here.
+
+02:21.735 --> 02:24.927
+So remember I have mentioned this example
+
+02:24.928 --> 02:30.659
+already in the first video, okay.
+
+02:30.660 --> 02:40.112
+So now let's go to some more complex examples about lambdas.
+
+02:40.113 --> 02:42.722
+In our first example, "fcn1",
+
+02:42.723 --> 02:49.576
+you define a local variable "v1"
+
+02:49.577 --> 02:54.055
+and then you have your lambda and in the capture list
+
+02:54.056 --> 02:57.467
+you provide "v1".
+
+02:57.468 --> 03:04.326
+After that you set the "v1" to 0
+
+03:04.327 --> 03:13.067
+and then you basically call the lambda and insert "j" with it.
+
+03:13.068 --> 03:20.842
+What happens now is that "j" becomes 42.
+
+03:20.843 --> 03:25.012
+Why? Because if you use this syntax,
+
+03:25.013 --> 03:35.473
+then "v1" is copied. So that's the first version.
+
+03:35.474 --> 03:46.091
+You can also use here the reference syntax
+
+03:46.092 --> 03:51.007
+and what happens then is,
+
+03:51.008 --> 03:55.387
+"f2" contains now a reference to the "v1"
+
+03:55.388 --> 03:59.970
+and when you set it to 0 outside,
+
+03:59.971 --> 04:05.204
+then this means also inside,
+
+04:05.205 --> 04:10.043
+because it's the same object, it is then 0.
+
+04:10.044 --> 04:17.195
+And thus if you print "j", it will become 0.
+
+04:17.196 --> 04:22.986
+So that's one way to control what happens inside,
+
+04:22.987 --> 04:27.646
+depending on how you set up your capture list.
+
+04:27.647 --> 04:34.048
+A third version is, when you want
+
+04:34.049 --> 04:41.805
+to be able to change the captured variable inside,
+
+04:41.806 --> 04:43.943
+then there is the mutable keywords.
+
+04:43.944 --> 04:47.249
+So you just provide mutable
+
+04:47.250 --> 04:52.310
+and then you can you internally increase "v1"
+
+04:52.311 --> 04:54.532
+If you don't provide mutable,
+
+04:54.533 --> 04:59.217
+then it will basically not be possible.
+
+04:59.218 --> 05:08.729
+Number four. Here you have again a reference,
+
+05:08.730 --> 05:12.871
+that you insert and then you increase it.
+
+05:12.872 --> 05:16.015
+So that's our second version here,
+
+05:16.016 --> 05:20.329
+but now you change inside the "v1".
+
+05:20.330 --> 05:28.122
+And that means that basically this line sets
+
+05:28.123 --> 05:31.944
+the v1 from here to zero.
+
+05:31.945 --> 05:34.974
+The same one is also used here
+
+05:34.975 --> 05:42.304
+and thus zero increased, is 1 and "j" is 1 at the end.
+
+05:42.305 --> 05:47.925
+And the last example, a little bit more complicated
+
+05:47.926 --> 05:54.030
+here you have a constant pointer to "v1"
+
+05:54.031 --> 05:58.716
+and what we do then, we provide this constant pointer
+
+05:58.717 --> 06:02.921
+to the lambda in the capture list.
+
+06:02.922 --> 06:06.184
+And now if we increment that
+
+06:06.185 --> 06:13.716
+and we increment the value the pointer points to.
+
+06:13.717 --> 06:20.843
+Then of course "j" will here become the incremented value
+
+06:20.844 --> 06:24.379
+of the value "p" points to.
+
+06:24.380 --> 06:28.417
+So that means it was 42 before,
+
+06:28.418 --> 06:31.323
+now we increase it, so it's 43.
+
+06:31.324 --> 06:36.910
+And both the "v1" and the "j" are 42,
+
+06:36.911 --> 06:39.781
+because the address is the same
+
+06:39.782 --> 06:46.041
+and thus here the value at that address is increased.
+
+06:46.042 --> 06:50.578
+In the second example, you set now "v1" to zero.
+
+06:50.579 --> 06:52.893
+So this "v1" becomes zero
+
+06:52.894 --> 06:57.310
+and thus since it is still the same address,
+
+06:57.311 --> 07:00.096
+also "j" is then set to zero
+
+07:00.097 --> 07:04.223
+and if you increase it, then it will be 1.
+
+07:04.224 --> 07:08.646
+So these are some basic examples
+
+07:08.647 --> 07:10.990
+of use cases for lambdas.
+
+07:10.991 --> 07:17.414
+Now at the end I will show one a little bit more complex example.
+
+07:17.415 --> 07:21.314
+So for that I need a helper function called print.
+
+07:21.315 --> 07:27.307
+So here a vector of strings is passed
+
+07:27.308 --> 07:33.064
+and then for each word in this vector.
+
+07:33.065 --> 07:36.646
+So this is again iterator interval.
+
+07:36.647 --> 07:41.441
+So you have "begin", "end", the whole vector
+
+07:41.442 --> 07:47.117
+You are using here a lambda function.
+
+07:47.118 --> 07:50.379
+And in this lambda function that takes
+
+07:50.380 --> 07:54.815
+constant string reference it has an argument,
+
+07:54.816 --> 07:57.904
+you just print the string.
+
+07:57.905 --> 08:02.346
+So that's all. It's a helper function.
+
+08:02.347 --> 08:08.901
+So the result will be, that each element is printed.
+
+08:08.902 --> 08:17.441
+And in our main program, we now do the following.
+
+08:17.442 --> 08:22.729
+We use a vector of strings
+
+08:22.730 --> 08:31.137
+and we fill it with words from the standard input.
+
+08:31.138 --> 08:36.334
+So the user can input here some words.
+
+08:36.335 --> 08:41.851
+After that these words are printed, like we see above.
+
+08:41.852 --> 08:45.157
+And at the end we sort the words,
+
+08:45.158 --> 08:50.678
+again using from standard library the sort algorithm.
+
+08:50.679 --> 08:57.592
+And here we see another example for a lambda
+
+08:57.593 --> 09:03.534
+in this case it's a predicate that says, okay,
+
+09:03.535 --> 09:08.526
+how do I compare now two different words.
+
+09:08.527 --> 09:12.660
+So you can specify that to the sort algorithm of course,
+
+09:12.661 --> 09:14.526
+it would also work without,
+
+09:14.527 --> 09:21.189
+because string supports the "<",
+
+09:21.190 --> 09:26.964
+but as an example I have again passed it here.
+
+09:26.965 --> 09:30.790
+So this will be used for the comparison
+
+09:30.791 --> 09:34.003
+inside of the sort.
+
+09:34.004 --> 09:40.001
+And if we run this example,
+
+09:40.002 --> 09:56.323
+what happens is. Let's insert some words and numbers.
+
+09:56.324 --> 10:01.360
+And first it will print the whole vector in the same order,
+
+10:01.361 --> 10:05.908
+as we have given it who provided it
+
+10:05.909 --> 10:07.641
+and then it sorts.
+
+10:07.642 --> 10:11.074
+So here I have mixed numbers and words.
+
+10:11.075 --> 10:13.195
+So first you see the numbers
+
+10:13.196 --> 10:18.005
+and these are sorted. And then you get the words
+
+10:18.006 --> 10:22.084
+and they are also in alphabetical order.
+
+10:22.085 --> 10:26.043
+So this is a very common use case,
+
+10:26.044 --> 10:32.955
+also for lambda functions, together with the standard library.
+
+10:32.956 --> 10:38.615
+[Music]

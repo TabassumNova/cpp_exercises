@@ -1,0 +1,1090 @@
+WEBVTT
+
+1
+00:00:01.319 --> 00:00:10.971
+[Musik]
+
+2
+00:00:10.972 --> 00:00:17.866
+In dieser Sitzung geht es um "placeholder type specifier".
+
+3
+00:00:17.867 --> 00:00:25.176
+Das Typsystem ist in Programmiersprachen sehr wichtig
+
+4
+00:00:25.177 --> 00:00:30.936
+und C ++ ist im Grunde eine statisch typisierte Sprache,
+
+5
+00:00:30.937 --> 00:00:40.252
+das bedeutet, dass bei der Kompilierung
+alle Typen grundsätzlich bekannt sind
+
+6
+00:00:40.253 --> 00:00:43.931
+und wenn Sie eine neue Variable einführen,
+
+7
+00:00:43.932 --> 00:00:46.109
+dann haben Sie zur gleichen Zeit
+
+8
+00:00:46.110 --> 00:00:49.499
+auch den Typ angeben.
+
+9
+00:00:49.500 --> 00:00:58.530
+In dem klassischen C / C ++ Programm,
+tun Sie das, wenn Sie die Variable definieren.
+
+10
+00:00:58.531 --> 00:01:01.215
+Lassen Sie uns ein ganz einfaches Beispiel machen:
+
+11
+00:01:01.216 --> 00:01:07.343
+Ich definiere eine ganzzahlige Variable mit dem Namen „i“.
+
+12
+00:01:07.344 --> 00:01:16.694
+Natürlich ist es immer eine gute Idee sie auch zu initialisieren,
+also weise ich ihr 1 zu.
+
+13
+00:01:16.695 --> 00:01:20.924
+Denken Sie daran, wenn Sie nicht die lokale Variable initialisieren,
+
+14
+00:01:20.925 --> 00:01:25.482
+wird sie im Grunde genommen zufällig initialisiert,
+
+15
+00:01:25.483 --> 00:01:32.818
+also werden Sie nicht
+den Wert kennen.
+
+16
+00:01:32.819 --> 00:01:37.744
+Im Fall einer globalen Variablen, also außerhalb der Haupt-Funktion hier,
+
+17
+00:01:37.745 --> 00:01:40.180
+oder auch in einigen anderen Fällen
+
+18
+00:01:40.181 --> 00:01:43.327
+wird sie stattdessen mit Null initialisiert.
+
+19
+00:01:43.328 --> 00:01:47.024
+Die Faustregel:
+
+20
+00:01:47.025 --> 00:01:50.896
+Jedes Mal, wenn Sie eine neue Variable definieren,
+
+21
+00:01:50.897 --> 00:01:55.082
+dann sollten Sie sie auch initialisieren.
+
+22
+00:01:55.083 --> 00:02:05.138
+Dieser "placeholder type specifier" ermöglicht es Ihnen,
+
+23
+00:02:05.139 --> 00:02:07.332
+den konkreten Typ,
+
+24
+00:02:07.333 --> 00:02:13.872
+in diesem Fall "int" durch das „auto“ Schlüsselwort zu ersetzen.
+
+25
+00:02:13.873 --> 00:02:16.445
+Was ändert das jetzt?
+
+26
+00:02:16.446 --> 00:02:22.825
+Grundsätzlich ermöglicht Ihnen das Schlüsselwort "auto"
+
+27
+00:02:22.826 --> 00:02:30.137
+hier im Code einen Typen zu definieren,
+ohne dass Sie es sehen,
+
+28
+00:02:30.138 --> 00:02:35.315
+aber wenn der Compiler diese Aussage sieht,
+
+29
+00:02:35.316 --> 00:02:43.909
+leitet er sich dann automatisch den
+konkreten Typ in der Situation für Sie ab.
+
+30
+00:02:43.910 --> 00:02:48.221
+Wie funktioniert diese im Allgemeinen?
+
+31
+00:02:48.222 --> 00:02:53.772
+Vereinfacht gesagt, der Compiler überprüft,
+
+32
+00:02:53.773 --> 00:02:57.219
+wie diese Variable initialisiert wird,
+
+33
+00:02:57.220 --> 00:03:00.463
+in diesem Fall initialisieren Sie die Variable mit einer 1
+
+34
+00:03:00.464 --> 00:03:09.242
+und dann wählt der Compiler den Typ der Variable „i“
+
+35
+00:03:09.243 --> 00:03:15.076
+anhand des Typen,
+womit Sie Ihre Variable initialisiert haben,
+
+36
+00:03:15.077 --> 00:03:19.983
+in diesem Fall der Konstante 1.
+
+37
+00:03:19.984 --> 00:03:26.070
+Da die Konstante vom Typ "int" ist,
+
+38
+00:03:26.071 --> 00:03:31.457
+wird auch in diesem Fall „i“ "int" sein.
+
+39
+00:03:31.458 --> 00:03:40.418
+So funktioniert "auto",
+wie wir in den nächsten Beispielen noch näher betrachten.
+
+40
+00:03:40.419 --> 00:03:49.854
+Wir werden einige Gründe sehen,
+warum es eine gute Idee ist, dieses „auto“ Schlüsselwort
+
+41
+00:03:49.855 --> 00:03:54.959
+in C ++ Implementierungen, zu verwenden.
+
+42
+00:03:54.960 --> 00:04:00.113
+Noch eine Anmerkung, wenn Sie die Konstante entfernen
+
+43
+00:04:00.114 --> 00:04:06.518
+und Sie dann versuchen zu kompilieren,
+
+44
+00:04:06.519 --> 00:04:11.439
+dann werden Sie eine Fehlermeldung erhalten.
+
+45
+00:04:11.440 --> 00:04:14.054
+Hier kann man es lesen,
+
+46
+00:04:14.055 --> 00:04:21.999
+dass „auto i“ keine Initialisierer hat.
+
+47
+00:04:22.000 --> 00:04:26.859
+Das bedeutet, dass der Compiler hier nicht in der Lage ist
+
+48
+00:04:26.860 --> 00:04:32.137
+den konkreten Typ von „i“ abzuleiten
+
+49
+00:04:32.138 --> 00:04:41.017
+und daher haben Sie einen Fehler erhalten,
+weil es nicht möglich ist
+
+50
+00:04:41.018 --> 00:04:46.104
+der Typ für „i“ hier zu wählen.
+
+51
+00:04:46.105 --> 00:05:00.352
+Als nächstes fügen wir hier ein
+statische Assert in der nächsten Zeile ein.
+
+52
+00:05:00.353 --> 00:05:01.739
+Und warum tun wir das?
+
+53
+00:05:01.740 --> 00:05:10.055
+Das statische Assert prüft
+bei der Kompilierung eine Bedingung.
+
+54
+00:05:10.056 --> 00:05:16.080
+In diesem Fall überprüft sie den Typ der Variable „i“
+
+55
+00:05:16.081 --> 00:05:25.457
+und den Typ, den wir durch das zweite neu
+eingeführte Schlüsselwort nämlich „decltype“ erhalten.
+
+56
+00:05:25.458 --> 00:05:34.111
+„auto“ und „decltype“ sind die zwei wichtigen
+Stichworte für "placeholder type specifier".
+
+57
+00:05:34.112 --> 00:05:42.401
+Mit "decltype" erhalten Sie den Typ der Variable „i“ zurück
+
+58
+00:05:42.402 --> 00:05:46.441
+und dann kann man es vergleichen
+mit einem anderen Typ.
+
+59
+00:05:46.442 --> 00:05:54.010
+Angenommen wir haben hier eine ganze Zahl.
+Und dann gibt es ein sogenanntes "type trait".
+
+60
+00:05:54.011 --> 00:05:58.251
+"type traits" werden wir in Zukunft im Detail diskutieren,
+
+61
+00:05:58.252 --> 00:06:02.128
+wenn wir über "templates" reden.
+
+62
+00:06:02.129 --> 00:06:05.437
+Jetzt müssen Sie nur verstehen,
+
+63
+00:06:05.438 --> 00:06:10.032
+dass das statische Assert bei der Kompilierung geprüft wird
+
+64
+00:06:10.033 --> 00:06:16.648
+und der Typ der Variable „i“ und integer das Gleiche ist.
+
+65
+00:06:16.649 --> 00:06:21.166
+Das wird dann gespeichert in
+
+66
+00:06:21.167 --> 00:06:28.918
+als ein Wahr / Falsch - Wert.
+Wenn es dann wahr ist,
+
+67
+00:06:28.919 --> 00:06:33.309
+dann ist alles in Ordnung,
+und wenn es falsch ist,
+
+68
+00:06:33.310 --> 00:06:39.040
+dann wird das statische Assert
+eine Nachricht anzeigen.
+
+69
+00:06:39.041 --> 00:06:49.537
+So zum Beispiel ist der Typ falsch,
+so dass, wenn Sie das Programm laufen,
+
+70
+00:06:49.538 --> 00:06:58.489
+und natürlich müssen wir jetzt wieder etwas zu „i“ zuweisen,
+damit es funktioniert,
+
+71
+00:06:58.490 --> 00:07:03.275
+dann, wie Sie sehen können, tritt kein Fehler auf.
+
+72
+00:07:03.276 --> 00:07:08.777
+Der Assert ist erfolgreich durchgelaufen
+
+73
+00:07:08.778 --> 00:07:15.137
+und der Typ ist richtig.
+Wenn wir das jetzt ändern,
+
+74
+00:07:15.138 --> 00:07:19.535
+jetzt habe ich die ganzzahlige Konstante
+
+75
+00:07:19.536 --> 00:07:23.893
+durch eine Fließkommakonstante ersetzt,
+
+76
+00:07:23.894 --> 00:07:30.223
+indem ich sie mit 1,0 überschrieb, dann werden wir neu kompilieren und ausführen,
+
+77
+00:07:30.224 --> 00:07:38.408
+wie Sie dann hier zu sehen bekommen, wird ein statische Assertionsfehler ausgegeben.
+
+78
+00:07:38.409 --> 00:07:40.904
+Der Typ ist falsch.
+Das ist die Nachricht
+
+79
+00:07:40.905 --> 00:07:45.782
+die hier angezeigt wird.
+Auf diese Weise
+
+80
+00:07:45.783 --> 00:07:51.423
+können wir jetzt leicht überprüfen
+
+81
+00:07:51.424 --> 00:07:57.191
+was „auto“, oder besser gesagt der Compiler
+
+82
+00:07:57.192 --> 00:08:01.609
+für einen bestimmten Typ wählt, wenn wir das „auto“ Schlüsselwort verwenden.
+
+83
+00:08:01.610 --> 00:08:08.591
+In diesem Fall habe ich Ihnen
+schon gesagt, es ist ein "double".
+
+84
+00:08:08.592 --> 00:08:13.065
+Wenn wir die Überprüfung auch zum "double" machen,
+und erneut kompilieren,
+
+85
+00:08:13.066 --> 00:08:17.353
+dann kann man keinen Fehler mehr sehen.
+
+86
+00:08:17.354 --> 00:08:22.356
+Das funktioniert.
+
+87
+00:08:22.357 --> 00:08:35.393
+Nun geht es um einen interessanten Beispiel,
+wo wir jetzt ein Vektor verwendet werden.
+
+88
+00:08:35.394 --> 00:08:43.190
+Einer der Anwendungsfälle, wo es
+wirklich gut ist das Schlüsselwort "auto" zu haben,
+
+89
+00:08:43.191 --> 00:08:47.649
+tritt auf, wenn Sie mit der Standardbibliothek arbeiten.
+
+90
+00:08:47.650 --> 00:09:06.621
+Wir können also davon ausgehen, dass wir einen Vektor definieren möchten.
+
+91
+00:09:06.622 --> 00:09:11.101
+In meinem zweiten Beispiel,
+
+92
+00:09:11.102 --> 00:09:16.860
+wählen Sie einen Vektor. Das ist eine sehr häufiger
+
+93
+00:09:16.861 --> 00:09:22.702
+Fall, wenn Sie mit der Standardbibliothek arbeiten,
+
+94
+00:09:22.703 --> 00:09:27.681
+dann verwenden Sie oft
+die Behälter ("container") darin.
+
+95
+00:09:27.682 --> 00:09:32.767
+Ich habe einen Vektor von ganzen Zahlen ausgewählt namens „vec“.
+
+96
+00:09:32.768 --> 00:09:39.425
+Vektoren werde ich näher
+
+97
+00:09:39.426 --> 00:09:42.207
+in einer der nächsten Sitzungen im Detail erläutern.
+
+98
+00:09:42.208 --> 00:09:54.729
+Ich habe hier Initialisiererliste verwendet, um einen Vektor zu erstellen
+mit drei Elementen,
+
+99
+00:09:54.730 --> 00:09:59.377
+nämlich die Werte 1, 2, 3.
+
+100
+00:09:59.378 --> 00:10:06.444
+Das ist auch ein Konzept, das neu eingeführt wurde
+in C++11.
+
+101
+00:10:06.445 --> 00:10:10.446
+Wir nehmen jetzt an, dass wir diesen Vektor erstellt haben
+
+102
+00:10:10.447 --> 00:10:16.153
+und natürlich könnte ich dann folgendes tun:
+
+103
+00:10:16.154 --> 00:10:23.478
+Ich konnte einen Iterator verwenden,
+
+104
+00:10:23.479 --> 00:10:27.766
+um durch alle Elemente zu gehen und sie auszugeben
+
+105
+00:10:27.767 --> 00:10:31.747
+auf dem Standard "out".
+
+106
+00:10:31.748 --> 00:10:38.289
+Was passiert dann?
+Ich setze mein statisches Assert als Kommentar,
+
+107
+00:10:38.290 --> 00:10:40.575
+weil ich es jetzt nicht brauche.
+
+108
+00:10:40.576 --> 00:10:49.883
+Wir betrachten das Ergebnis.
+Wir geben eins zwei drei aus.
+
+109
+00:10:49.884 --> 00:10:56.264
+Dies ist ein sehr verbreiteter Code.
+
+110
+00:10:56.265 --> 00:11:03.744
+Sie können hier sehen, dass der Typ
+des Iterator hier,
+
+111
+00:11:03.745 --> 00:11:10.796
+von dem Behälter abhängt,
+und noch schlimmer, auch davon abhängt,
+
+112
+00:11:10.797 --> 00:11:16.293
+von dem Typ der Elemente im Inneren des Behälters.
+
+113
+00:11:16.294 --> 00:11:24.930
+Hier haben wir einen Fall, wo es
+wirklich viel einfacher ist,
+
+114
+00:11:24.931 --> 00:11:32.336
+anstatt den ganzen komplizierten Typ nur „auto“ zu schreiben.
+
+115
+00:11:32.337 --> 00:11:38.516
+Wenn Sie es erneut ausführen,
+
+116
+00:11:38.517 --> 00:11:42.039
+produzieren sie das gleiche Ergebnis.
+
+117
+00:11:42.040 --> 00:11:52.628
+Als nächstes überprüfen wir, ob der Compiler
+
+118
+00:11:52.629 --> 00:11:58.314
+den Typ von "vector.begin()" überprüft, was zurück gegeben wird.
+
+119
+00:11:58.315 --> 00:12:03.855
+Natürlich gibt es einen Iterator
+
+120
+00:12:03.856 --> 00:12:09.417
+und daher kann der Compiler
+
+121
+00:12:09.418 --> 00:12:19.140
+„it“ auf den Typen des Iterators zu setzen.
+
+122
+00:12:19.141 --> 00:12:27.311
+Lassen Sie mich das definieren.
+
+123
+00:12:27.312 --> 00:12:34.967
+Sie haben hier den decltype von „it“
+
+124
+00:12:34.968 --> 00:12:38.972
+und wenn Sie das laufen lassen ...
+
+125
+00:12:38.973 --> 00:12:46.615
+Wir haben ein kleines Problem.
+Template - Argument 2 ist ungültig.
+
+126
+00:12:46.616 --> 00:12:54.244
+Das bedeutet „it“ ist ungültig.
+
+127
+00:12:54.245 --> 00:12:56.220
+Und warum ist „it" ungültig?
+
+128
+00:12:56.221 --> 00:13:01.259
+Das ist ein sehr gutes Beispiel.
+
+129
+00:13:01.260 --> 00:13:06.076
+Denken Sie darüber eine Minute nach.
+
+130
+00:13:06.077 --> 00:13:10.755
+Ich denke, die meisten von Ihnen werden es schon gesehen haben.
+
+131
+00:13:10.756 --> 00:13:19.924
+Bevor ich es erkläre, mache ich
+eine einfache Änderung in meinem Code.
+
+132
+00:13:19.925 --> 00:13:34.941
+Ich verwende hier nur einen neuen Block und dann prüfe ich jetzt innerhalb
+der Schleife in jeder Iteration,
+
+133
+00:13:34.942 --> 00:13:42.973
+ob „it“ vom Typ Iterator ist.
+
+134
+00:13:42.974 --> 00:13:44.823
+Wenn ich es jetzt laufen lasse funktioniert es,
+
+135
+00:13:44.824 --> 00:13:48.473
+Ich denke Sie haben das Problem erkannt.
+
+136
+00:13:48.474 --> 00:13:55.545
+Ich definiere hier „it“ in der for-Schleife,
+
+137
+00:13:55.546 --> 00:14:02.267
+so dass der Bereich dieser Variable
+nur innerhalb der for-Schleife ist.
+
+138
+00:14:02.268 --> 00:14:09.152
+Jetzt habe ich einen Block und natürlich definiert dieser Block
+den Umfang der for-Schleife,
+
+139
+00:14:09.153 --> 00:14:14.883
+wenn ich das statische Assert benutze
+
+140
+00:14:14.884 --> 00:14:18.869
+außerhalb des Bereichs der for-Schleife,
+
+141
+00:14:18.870 --> 00:14:23.565
+wird dann die „it“ Variable nicht mehr bekannt sein,
+
+142
+00:14:23.566 --> 00:14:26.215
+sie ist definiert in einem anderen Bereich und
+
+143
+00:14:26.216 --> 00:14:28.968
+daher kommt der Fehler.
+
+144
+00:14:28.969 --> 00:14:36.772
+Eine Lösung wäre es, „it“ vor der Schleife zu definieren,
+
+145
+00:14:36.773 --> 00:14:41.474
+so kann ich dann auch das statische Assert nach der Schleife verwenden.
+
+146
+00:14:41.475 --> 00:14:46.250
+Aber das war jetzt nur, um Ihnen
+
+147
+00:14:46.251 --> 00:14:51.147
+diesen Anwendungsfall von Auto zu zeigen. So mache ich das jetzt nicht.
+
+148
+00:14:51.148 --> 00:14:57.823
+Okay. Also nach diesem sehr guten Beispiel,
+
+149
+00:14:57.824 --> 00:15:01.070
+gibt es eine andere Sache.
+
+150
+00:15:01.071 --> 00:15:06.054
+Denken Sie an Fälle, in denen man einfach nicht den Typen wissen kann
+
+151
+00:15:06.055 --> 00:15:10.922
+und dies ist nun unser drittes Beispiel.
+
+152
+00:15:10.923 --> 00:15:16.619
+Dafür werden wir auch ein neues Feature verwenden
+
+153
+00:15:16.620 --> 00:15:24.137
+des Standard-C ++ 11
+
+154
+00:15:24.138 --> 00:15:28.161
+und dies sind die sogenannten Lambda-Funktionen,
+
+155
+00:15:28.162 --> 00:15:33.166
+oder auch unbekannte oder unbenannte Funktionen.
+
+156
+00:15:33.167 --> 00:15:37.631
+Also, diese unbenannte Funktionen,
+
+157
+00:15:37.632 --> 00:15:41.518
+ich werde auch noch eine weitere Sitzung darüber halten,
+
+158
+00:15:41.519 --> 00:15:46.584
+also gibt es jetzt nur eine sehr kurze Einführung.
+
+159
+00:15:46.585 --> 00:15:51.846
+Es gab eine leichte Syntax Veränderung
+
+160
+00:15:51.847 --> 00:15:56.877
+für Funktionsdefinitionen in dem C ++ 11 Standard
+
+161
+00:15:56.878 --> 00:16:05.451
+und jetzt ist es möglich,
+Funktionen zu definieren, wie ich hier tue.
+
+162
+00:16:05.452 --> 00:16:08.526
+So wird dieser Block ist
+der Funktionskörper.
+
+163
+00:16:08.527 --> 00:16:12.827
+Also, gibt die Funktion 3 plus „x“.
+
+164
+00:16:12.828 --> 00:16:15.652
+Dies ist die Parameterliste der Funktion.
+
+165
+00:16:15.653 --> 00:16:19.019
+Es nimmt einen Integer-Parameter
+
+166
+00:16:19.020 --> 00:16:21.552
+und das werde ich später vorstellen,
+
+167
+00:16:21.553 --> 00:16:26.283
+das ist die capture-Liste, die im Moment leer ist.
+
+168
+00:16:26.284 --> 00:16:30.701
+Sie haben jetzt hier ein Objekt
+
+169
+00:16:30.702 --> 00:16:35.821
+was eine solche Lambda-Funktion ist.
+
+170
+00:16:35.822 --> 00:16:44.070
+Und der Compiler erstellt für Sie den Typen
+für jede dieser Lambda - Funktionen
+
+171
+00:16:44.071 --> 00:16:45.997
+dass Sie verwenden
+
+172
+00:16:45.998 --> 00:16:49.228
+und Sie wissen es nicht dabei.
+
+173
+00:16:49.229 --> 00:16:52.864
+Denn der Typ ist immer anders.
+
+174
+00:16:52.865 --> 00:16:59.360
+Das bedeutet, wenn Sie die Lambda-Funktion in einer Variable speichern möchten,
+
+175
+00:16:59.361 --> 00:17:02.441
+um es später zu benutzen,
+
+176
+00:17:02.442 --> 00:17:05.504
+müssen wir das „auto“ verwenden.
+
+177
+00:17:05.505 --> 00:17:13.571
+Also dafür brauchen wir es.
+Natürlich, wenn Sie das Lambda definiert haben,
+
+178
+00:17:13.572 --> 00:17:20.190
+dann können Sie es auch wie erwartet verwenden
+
+179
+00:17:20.191 --> 00:17:30.177
+Sagen wir, Sie wollen
+Lambda von drei haben und wir geben es auf dem Bildschirm aus.
+
+180
+00:17:30.178 --> 00:17:35.631
+Wenn Sie es laufen lass, dann ergibt es 6
+
+181
+00:17:35.632 --> 00:17:40.928
+was nur drei plus drei ist, wie erwartet.
+
+182
+00:17:40.929 --> 00:17:50.155
+Okay. Also, das ist schön und jetzt
+natürlich wäre es auch interessant sein zu sehen,
+
+183
+00:17:50.156 --> 00:17:54.802
+welchen Typ Lambda ist.
+
+184
+00:17:54.803 --> 00:18:01.535
+Und dafür verwenden wir die „typeid“.
+
+185
+00:18:01.536 --> 00:18:09.853
+Tun Sie es in der nächsten Zeile.
+
+186
+00:18:09.854 --> 00:18:15.595
+Also was passiert, wenn ich nur Lambda anzeigen lasse?
+
+187
+00:18:15.596 --> 00:18:19.109
+Das ist nicht wirklich ratsam.
+
+188
+00:18:19.110 --> 00:18:24.816
+Also, ich werde hier ausgeben,
+„Lambda hat Typen“
+
+189
+00:18:24.817 --> 00:18:30.236
+und dann "typeid(lambda).name".
+
+190
+00:18:30.237 --> 00:18:34.932
+Wenn ich das laufen lasse. Lauf!
+
+191
+00:18:34.933 --> 00:18:39.756
+Wir müssen hier Typinfo-Header inkludieren
+
+192
+00:18:39.757 --> 00:18:48.225
+und wenn wir es dann neu kompilieren,
+sehen wir, dass das Lambda
+
+193
+00:18:48.226 --> 00:18:53.206
+einen sehr seltsamen Typen hat, wie ich gesagt habe.
+
+194
+00:18:53.207 --> 00:18:56.849
+Dieser Typ ist festgelegt,
+
+195
+00:18:56.850 --> 00:19:00.072
+oder vom Compiler bestimmt,
+
+196
+00:19:00.073 --> 00:19:04.649
+und jede Lambda-Funktion hat einen anderen Typen.
+
+197
+00:19:04.650 --> 00:19:10.455
+Das kann ich Ihnen mit einer zweiten Definition zeigen.
+
+198
+00:19:10.456 --> 00:19:17.345
+Angenommen, dass wir „lambda2“ haben und hier haben wir „int x“ und „int y“,
+
+199
+00:19:17.346 --> 00:19:23.298
+dann haben wir „y“ plus „x“. Wie auch immer.
+
+200
+00:19:23.299 --> 00:19:30.423
+Und wenn Sie das einfach kopieren, das „lambda2“ bekommt dann das hier.
+
+201
+00:19:30.424 --> 00:19:39.568
+Wie auch immer. Wir führen es aus und dann sehen Sie,
+
+202
+00:19:39.569 --> 00:19:43.076
+es gibt hier einen anderen Typen an.
+
+203
+00:19:43.077 --> 00:19:49.557
+Es hängt von der Implementierung, was genau
+der Name dieses Typen ist.
+
+204
+00:19:49.558 --> 00:19:55.557
+Sie sehen, es ist sehr ähnlich,
+so dass es ein konstanter Teil zu sein scheint,
+
+205
+00:19:55.558 --> 00:19:57.725
+dass Ihnen sagt,
+
+206
+00:19:57.726 --> 00:20:01.261
+dies ist eine Lambda-Funktion.
+
+207
+00:20:01.262 --> 00:20:07.732
+Okay. Mein letztes Beispiel in dieser Sitzung ist eine Funktion
+
+208
+00:20:07.733 --> 00:20:13.208
+und dies ist auch ein sehr häufiger Anwendungsfall.
+
+209
+00:20:13.209 --> 00:20:17.748
+Nehmen Sie an, Sie haben wie in dieser Situation hier,
+
+210
+00:20:17.749 --> 00:20:26.798
+eine Funktion, die zwei Objekte eines bestimmten Typs addieren soll.
+
+211
+00:20:26.799 --> 00:20:32.289
+Sie verwenden hier diese Typen als Template - Parameter
+„T“ und „U“
+
+212
+00:20:32.290 --> 00:20:37.038
+und was Sie zurückgeben wollen
+ist die Summe aus beiden.
+
+213
+00:20:37.039 --> 00:20:44.409
+Natürlich ist es nicht klar, welchen Typen der Summe hat.
+
+214
+00:20:44.410 --> 00:20:49.030
+Denken Sie nur über ein sehr einfaches Beispiel.
+
+215
+00:20:49.031 --> 00:21:00.499
+Lassen Sie uns sagen, wir haben jetzt „add“ 2 und 3.0.
+
+216
+00:21:00.500 --> 00:21:04.567
+Ich kann die „Autos“ hier bewegen.
+
+217
+00:21:04.568 --> 00:21:11.592
+Und ich möchte das Ergebnis speichern wieder in „auto“ Variable
+
+218
+00:21:11.593 --> 00:21:31.108
+und dann zeige ich es an:
+„res hat Typ - res“
+
+219
+00:21:31.109 --> 00:21:37.613
+Wenn ich es laufen lasse zeigt es fünf an.
+
+220
+00:21:37.614 --> 00:21:42.541
+Das ist richtig.
+Zwei plus drei ist fünf, hat Typ „d“,
+
+221
+00:21:42.542 --> 00:21:45.671
+bei meinem Compiler bedeutet „d“ double,
+
+222
+00:21:45.672 --> 00:21:48.632
+Sie bekommen nur eine Abkürzung hier,
+
+223
+00:21:48.633 --> 00:21:51.844
+und das macht auch Sinn.
+
+224
+00:21:51.845 --> 00:21:54.690
+Warum ist „auto“ double in diesem Fall?
+
+225
+00:21:54.691 --> 00:21:59.301
+Sie rufen die Funktion mit einer ganzen Zahl und einem double auf
+
+226
+00:21:59.302 --> 00:22:02.539
+und natürlich, wenn Sie eine ganze Zahl und ein double addieren,
+
+227
+00:22:02.540 --> 00:22:06.595
+um Informationen nicht zu verlieren,
+
+228
+00:22:06.596 --> 00:22:09.882
+müssen Sie die ganze Zahl in einen double konvertieren und dann zusammenaddieren.
+
+229
+00:22:09.883 --> 00:22:18.060
+Dies ein guter Fall,
+wo man auch sehen,
+
+230
+00:22:18.061 --> 00:22:21.057
+dass es nützlich ist, das „auto“ Schlüsselwort,
+
+231
+00:22:21.058 --> 00:22:26.740
+denn natürlich können Sie nicht im Voraus wissen,
+
+232
+00:22:26.741 --> 00:22:28.178
+welchen Typ es sein sollte.
+
+233
+00:22:28.179 --> 00:22:32.888
+Auch wenn man davon ausgehen kann,
+sollte es entweder die Art der „T“ oder „U“ sein,
+
+234
+00:22:32.889 --> 00:22:37.302
+dann wissen Sie aber nicht welche, denn sie können die Argumente auch durch-tauschen.
+
+235
+00:22:37.303 --> 00:22:41.122
+Im Fall von double und int
+
+236
+00:22:41.123 --> 00:22:44.240
+können Sie natürlich auch 3.0 und 2 haben
+
+237
+00:22:44.241 --> 00:22:50.016
+und dann wäre es „T“ statt „U“.
+zum Beispiel das double.
+
+238
+00:22:50.017 --> 00:22:55.687
+Was habe wir in dieser ersten Sitzung gelernt?
+
+239
+00:22:55.688 --> 00:23:05.666
+Wir haben zwei neue C++ Schlüsselwörter,
+nämlich „auto“ und „decltype“, gelernt.
+
+240
+00:23:05.667 --> 00:23:12.770
+Diese werden verwendet um
+automatisch den Typ durch den Compiler abzuleiten
+
+241
+00:23:12.771 --> 00:23:16.408
+Und wir haben einige Beispiele gesehen,
+
+242
+00:23:16.409 --> 00:23:21.434
+wo diese nützlich sind.
+
+243
+00:23:21.435 --> 00:23:28.063
+Zum Beispiel, wenn Sie gerade keine Ahnung haben,
+
+244
+00:23:28.064 --> 00:23:31.892
+welchen Typ ein bestimmtes Objekt hat,
+
+245
+00:23:31.893 --> 00:23:34.765
+das war der Fall der Lambda-Funktionen.
+
+246
+00:23:34.766 --> 00:23:37.693
+Wenn Sie eine sehr komplizierten Typ
+
+247
+00:23:37.694 --> 00:23:40.444
+und es ist sehr mühsam, es zu schreiben,
+
+248
+00:23:40.445 --> 00:23:45.013
+wie im Fall des Vektor-Iteratoren.
+
+249
+00:23:45.014 --> 00:23:52.871
+Im selben Beispiel
+wenn Sie einen generischen Code haben wollen,
+
+250
+00:23:52.872 --> 00:23:55.202
+wenn Sie nicht möchten, Ihren Code neu zu schreiben,
+
+251
+00:23:55.203 --> 00:23:58.954
+wenn Sie den Vektor von integer zu double wechseln,
+
+252
+00:23:58.955 --> 00:24:04.168
+dann ist auch das „auto“ Schlüsselwort sehr hilfreich.
+
+253
+00:24:04.169 --> 00:24:10.447
+Und dann können Sie es natürlich
+auch im Fall von Funktionen benutzen,
+
+254
+00:24:10.448 --> 00:24:15.088
+in denen Sie einen flexiblen Rückgabetypen haben,
+
+255
+00:24:15.089 --> 00:24:22.319
+dass beispielsweise abhängig von einer gewissen Operation,
+oder einem Ergebnis ist.
+
+256
+00:24:22.320 --> 00:24:34.000
+OKAY. Jetzt haben wir das Ende der ersten Sitzung erreicht
+und wir sehen uns in den nächsten.
+

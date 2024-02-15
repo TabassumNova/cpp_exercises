@@ -1,0 +1,799 @@
+WEBVTT
+
+00:01.260 --> 00:08.246
+[Music]
+
+00:12.671 --> 00:15.861
+In this chapter we want to talk
+
+00:15.862 --> 00:19.539
+about pointers and references.
+
+00:19.540 --> 00:22.751
+What is a reference?
+
+00:22.752 --> 00:26.759
+In contrast to a usual variable, where you wright
+
+00:26.760 --> 00:36.175
+type name equals initialization, so "int i = 5;",
+
+00:36.176 --> 00:42.825
+you can define a reference to give another name,
+
+00:42.826 --> 00:49.604
+also to the "i" variable. So it's just an alias.
+
+00:49.605 --> 00:53.526
+Basically refers to the same object,
+
+00:53.527 --> 00:57.424
+but has now a different name.
+
+00:57.425 --> 00:59.744
+Whenever you apply now an operation
+
+00:59.745 --> 01:02.710
+to this reference, it is the same,
+
+01:02.711 --> 01:08.315
+as if you directly apply it to the object, it is bound to.
+
+01:08.316 --> 01:11.043
+It is also required,
+
+01:11.044 --> 01:17.610
+that you initialize the reference, when you define it.
+
+01:17.611 --> 01:20.338
+So you bind it directly to the object
+
+01:20.339 --> 01:25.758
+and you also cannot bind it to another object later on.
+
+01:25.759 --> 01:29.913
+If the reference is non const,
+
+01:29.914 --> 01:33.569
+then you can only attach it to an object
+
+01:33.570 --> 01:37.194
+of the same type, as the reference itself.
+
+01:37.195 --> 01:38.811
+So this is checked.
+
+01:38.812 --> 01:44.848
+So for example you can bind integer variable
+
+01:44.849 --> 01:46.967
+to an integer reference,
+
+01:46.968 --> 01:53.130
+but you cannot bind a double object to an integer reference.
+
+01:53.131 --> 01:56.778
+Then there is the constant reference.
+
+01:56.779 --> 01:59.708
+This is a little bit more flexible,
+
+01:59.709 --> 02:04.534
+because it can also be bound to a constant object,
+
+02:04.535 --> 02:06.673
+to a non constant object,
+
+02:06.674 --> 02:09.844
+or the result of an expression.
+
+02:09.845 --> 02:11.705
+So this is not possible,
+
+02:11.706 --> 02:17.225
+when you have non-constant reference.
+
+02:17.226 --> 02:22.531
+Of course a const reference cannot change the object
+
+02:22.532 --> 02:26.580
+to it which it refers to.
+
+02:26.581 --> 02:30.489
+Now in contrast to the reference as there is the pointer.
+
+02:30.490 --> 02:33.433
+The pointer is something completely different.
+
+02:33.434 --> 02:35.577
+The pointer is an object,
+
+02:35.578 --> 02:39.710
+that holds the address of an object.
+
+02:39.711 --> 02:47.077
+So it basically stores the your address in memory
+
+02:47.078 --> 02:54.863
+and then you can look up at that address a certain object.
+
+02:54.864 --> 02:58.856
+In order to initialize or also assign a pointer
+
+02:58.857 --> 03:02.701
+you can now use a constant expression.
+
+03:02.702 --> 03:07.212
+So that is for example the null pointer.
+
+03:07.213 --> 03:11.345
+You can use an address of an object.
+
+03:11.346 --> 03:15.570
+Here you use the address operator.
+
+03:15.571 --> 03:21.339
+So for example you can assign the integer pointer "p"
+
+03:21.340 --> 03:25.319
+the address of an integer variable.
+
+03:25.320 --> 03:28.233
+Or you can also assign the address
+
+03:28.234 --> 03:30.892
+one past the end of another object.
+
+03:30.893 --> 03:38.197
+This is interesting in the context of iterators.
+
+03:38.198 --> 03:43.411
+Or just another valid pointer of the same type.
+
+03:43.412 --> 03:45.033
+So this is pointer.
+
+03:45.034 --> 03:47.900
+And now if you compare them
+
+03:47.901 --> 03:50.812
+and let's look at this example.
+
+03:50.813 --> 03:54.856
+So you have two integer variables "i" and "j",
+
+03:54.857 --> 03:58.621
+then you define pointers, so "pi"
+
+03:58.622 --> 04:01.805
+and you assign it to the address of "i"
+
+04:01.806 --> 04:05.281
+and address of "j" "pj",
+
+04:05.282 --> 04:10.570
+then the next line this statement "pi = pj",
+
+04:10.571 --> 04:17.100
+this would now assign the two pointers to each other.
+
+04:17.101 --> 04:20.346
+So not the values,
+
+04:20.347 --> 04:22.482
+that are found at the memory location,
+
+04:22.483 --> 04:25.529
+but the pointers are assigned.
+
+04:25.530 --> 04:30.048
+And in contrast to that, next line the "ri",
+
+04:30.049 --> 04:35.364
+this is now a reference and here we can also assign "i",
+
+04:35.365 --> 04:39.386
+but here without address operator,
+
+04:39.387 --> 04:43.625
+because it is, as I have said, an alias,
+
+04:43.626 --> 04:48.267
+so you couldn't just set it to "i" or to "j".
+
+04:48.268 --> 04:51.871
+And then when you write "ri = rj"
+
+04:51.872 --> 04:57.605
+then basically this assigns the values not to addresses.
+
+04:57.606 --> 05:03.077
+So ways to compare pointers and references.
+
+05:03.078 --> 05:08.259
+So the reference always refers to an object, as I have said.
+
+05:08.260 --> 05:11.705
+And if you assign to a reference,
+
+05:11.706 --> 05:14.937
+then you also change the underlying object.
+
+05:14.938 --> 05:19.228
+The pointer of course you can assign a different address,
+
+05:19.229 --> 05:23.405
+but you will not change the underlying values,
+
+05:23.406 --> 05:29.383
+that are found on at that address.
+
+05:29.384 --> 05:34.441
+Now if you combine that with the const qualifier,
+
+05:34.442 --> 05:38.718
+it becomes a little bit more complicated.
+
+05:38.719 --> 05:43.421
+So i want to show here some examples.
+
+05:43.422 --> 05:49.086
+In the first line you have here a constant pointer.
+
+05:49.087 --> 05:55.865
+So the constant pointer to double.
+
+05:55.866 --> 05:58.762
+Is this correct?
+
+05:58.763 --> 06:09.398
+No it isn't, because it is a pointer to a constant double.
+
+06:09.399 --> 06:15.901
+So the idea is to read it from right to left.
+
+06:15.902 --> 06:21.157
+So this means it's a pointer
+
+06:21.158 --> 06:23.919
+and pointer points to a constant double.
+
+06:23.920 --> 06:29.693
+So when you try to set the value at that address
+
+06:29.694 --> 06:32.673
+this will result in an error,
+
+06:32.674 --> 06:36.773
+because the underlying value should be const.
+
+06:36.774 --> 06:41.593
+In the next example the "curErr"
+
+06:41.594 --> 06:46.265
+here you have basically a constant pointer now.
+
+06:46.266 --> 06:49.447
+Not a pointer to a constant.
+
+06:49.448 --> 06:53.151
+Again read from the right to the left.
+
+06:53.152 --> 06:57.591
+So it is a constant pointer to integer.
+
+06:57.592 --> 07:01.167
+And in this case you can
+
+07:01.168 --> 07:05.195
+change the underlying value the integer,
+
+07:05.196 --> 07:07.490
+but you cannot change the address.
+
+07:07.491 --> 07:12.325
+"curErr = curErr" here you try to reassign
+
+07:12.326 --> 07:13.881
+the "curErr" pointer
+
+07:13.882 --> 07:17.935
+and this will result in an error.
+
+07:17.936 --> 07:24.743
+And the last example, this "pi" pointer, this is now both.
+
+07:24.744 --> 07:30.598
+So you have here a constant pointer to a constant double.
+
+07:30.599 --> 07:35.325
+So here you cannot set the pointer to another address
+
+07:35.326 --> 07:39.248
+and you also cannot change the underlying value,
+
+07:39.249 --> 07:45.245
+because it's also const object.
+
+07:45.246 --> 07:51.699
+Next thing is now a new kind of reference
+
+07:51.700 --> 07:56.315
+and the reason to introduce that was,
+
+07:56.316 --> 08:01.637
+that one wants to move objects.
+
+08:01.638 --> 08:05.964
+So classically if you copy objects
+
+08:05.965 --> 08:10.254
+often temporaries are involved,
+
+08:10.255 --> 08:16.303
+but if you move objects from one thing to another,
+
+08:16.304 --> 08:20.126
+then basically the old thing,
+
+08:20.127 --> 08:24.623
+that you have moved is or can be destroyed
+
+08:24.624 --> 08:29.203
+and the content is completely moved to the new thing.
+
+08:29.204 --> 08:33.802
+So this means it can be really a performance boost,
+
+08:33.803 --> 08:38.992
+because you save these temporaries.
+
+08:38.993 --> 08:42.841
+Now the underlying language feature that supports that
+
+08:42.842 --> 08:45.731
+is the rvalue reference.
+
+08:45.732 --> 08:51.349
+and strictly speaking rvalue reference is exactly
+
+08:51.350 --> 08:54.942
+the opposite of a classical reference.
+
+08:54.943 --> 09:00.345
+And you can assign all things you cannot assign
+
+09:00.346 --> 09:02.588
+to a classical reference.
+
+09:02.589 --> 09:07.410
+So here the example "int i = 42;"
+
+09:07.411 --> 09:12.186
+and the new syntax is now two times the address operator.
+
+09:12.187 --> 09:19.309
+So to say this is an rvalue reference now the "rr"
+
+09:19.310 --> 09:22.775
+and here you can assign a temporary.
+
+09:22.776 --> 09:26.428
+So "i*42", this is evaluated
+
+09:26.429 --> 09:31.936
+and it returns temporary result
+
+09:31.937 --> 09:34.637
+in a temporary object.
+
+09:34.638 --> 09:41.597
+And you could also assign 42 for example,
+
+09:41.598 --> 09:46.153
+or you try to assign "i"
+
+09:46.154 --> 09:48.939
+and then you get an error message,
+
+09:48.940 --> 09:52.646
+because "i" is a classical variable.
+
+09:52.647 --> 09:57.754
+This one you can assign to a usual reference,
+
+09:57.755 --> 10:05.387
+but you cannot assign it to the rvalue reference.
+
+10:05.388 --> 10:11.049
+So rvalue references refer again to object,
+
+10:11.050 --> 10:14.798
+that's the reason why they are called references,
+
+10:14.799 --> 10:19.126
+but those objects are about to be destroyed.
+
+10:19.127 --> 10:22.628
+So they are not variables.
+
+10:22.629 --> 10:30.408
+So the lvalues is a term that basically says,
+
+10:30.409 --> 10:36.087
+it can be on the left-hand side of an assignment.
+
+10:36.088 --> 10:39.278
+They are for example classical variables
+
+10:39.279 --> 10:41.676
+and have persistent state.
+
+10:41.677 --> 10:47.319
+The rvalues, they are on the right-hand side of an assignment,
+
+10:47.320 --> 10:51.642
+they can be literals or temporaries
+
+10:51.643 --> 10:58.587
+and therefore for example temporaries they expire soon.
+
+10:58.588 --> 11:02.678
+So these are the different kinds of values.
+
+11:02.679 --> 11:08.352
+So you can as a repetition, remember that
+
+11:08.353 --> 11:12.594
+the expression is lowest level of computation.
+
+11:12.595 --> 11:17.148
+You have operands you have your return or result
+
+11:17.149 --> 11:21.683
+and you basically have operators involved.
+
+11:21.684 --> 11:26.321
+These operators are trust symbols
+
+11:26.322 --> 11:29.031
+and they tell you what to do.
+
+11:29.032 --> 11:34.006
+So it can be multiplication, plus, assignment,
+
+11:34.007 --> 11:41.525
+so we have a list of predefined operators in C++.
+
+11:41.526 --> 11:45.994
+In addition to the list of operators
+
+11:45.995 --> 11:49.457
+you also need to specify the precedence.
+
+11:49.458 --> 11:54.116
+So which operator is executed first basically.
+
+11:54.117 --> 11:59.591
+So classical example is "a * b + c",
+
+11:59.592 --> 12:02.343
+this is a complex expression
+
+12:02.344 --> 12:04.428
+and then you have to specify, okay,
+
+12:04.429 --> 12:06.814
+first times is executed
+
+12:06.815 --> 12:10.144
+and then the plus operator for example.
+
+12:10.145 --> 12:15.460
+The associativity. This is interesting if you have now
+
+12:15.461 --> 12:19.979
+two operators involved, that have the same precedence,
+
+12:19.980 --> 12:21.789
+or that are the same.
+
+12:21.790 --> 12:26.855
+So example is "a == b == c".
+
+12:26.856 --> 12:30.310
+Then you can evaluate that from left to right,
+
+12:30.311 --> 12:36.323
+or from right to left and this is the associativity.
+
+12:36.324 --> 12:40.927
+Also, this we will see in another part,
+
+12:40.928 --> 12:44.390
+you can overload these operators
+
+12:44.391 --> 12:47.123
+and change basically the behavior,
+
+12:47.124 --> 12:54.132
+for your own class types.
+
+12:54.133 --> 12:59.072
+Now, why do I talk about these expressions again?
+
+12:59.073 --> 13:04.509
+Because you can categorize now the expressions.
+
+13:04.510 --> 13:08.863
+So the involved operands,
+
+13:08.864 --> 13:13.595
+they are either lvalues or rvalues
+
+13:13.596 --> 13:20.323
+and this can be even further detailed.
+
+13:20.324 --> 13:23.751
+So the lvalues, you have
+
+13:23.752 --> 13:27.228
+kind of an intermediate thing here in the hierarchy.
+
+13:27.229 --> 13:31.255
+This is a generalized lvalue
+
+13:31.256 --> 13:35.436
+and the generalized lvalue can now be a classical lvalue,
+
+13:35.437 --> 13:38.581
+so a variable, or an xvalue.
+
+13:38.582 --> 13:41.587
+An xvalue this is something new,
+
+13:41.588 --> 13:46.852
+that was introduced in the C++ 11 standard is an expiring value.
+
+13:46.853 --> 13:49.064
+So a temporary for example.
+
+13:49.065 --> 13:52.014
+And then on the other hand you have the rvalues
+
+13:52.015 --> 13:57.378
+and they are also either an xvalue or they are prvalue
+
+13:57.379 --> 14:00.275
+and this is a pure rvalue.
+
+14:00.276 --> 14:03.362
+So this sounds complicated at first sight,
+
+14:03.363 --> 14:06.238
+but it's very important to know,
+
+14:06.239 --> 14:09.210
+because then you exactly understand,
+
+14:09.211 --> 14:13.695
+what you can assign to what in your program
+
+14:13.696 --> 14:17.699
+and what exactly happens.
+
+14:17.700 --> 14:22.724
+So here again the full definitions,
+
+14:22.725 --> 14:25.273
+so lvalue is an expression,
+
+14:25.274 --> 14:28.880
+that yields an object or function.
+
+14:28.881 --> 14:31.233
+An xvalue is an expiring value,
+
+14:31.234 --> 14:33.754
+that refers to an object.
+
+14:33.755 --> 14:37.851
+Usually it is near the end of its lifetime.
+
+14:37.852 --> 14:43.240
+So that enables you to move the resources.
+
+14:43.241 --> 14:49.186
+prvalue is a pure rvalue. This is just not an xvalue.
+
+14:49.187 --> 14:52.081
+This glvalues generalized lvalue
+
+14:52.082 --> 14:54.662
+and the rvalue, this is an expression,
+
+14:54.663 --> 15:01.725
+that yields a value, but not the associated location.
+
+15:01.726 --> 15:10.714
+So that means it's kind of a literal, for example.
+
+15:10.715 --> 15:15.528
+In order to let this settle down a little bit,
+
+15:15.529 --> 15:18.318
+we see some examples.
+
+15:18.319 --> 15:20.571
+So the classical example is here
+
+15:20.572 --> 15:23.123
+just define integer "i" the variable
+
+15:23.124 --> 15:30.775
+and then "i = 1". So the "i", what kind of value is it?
+
+15:30.776 --> 15:39.854
+It is an lvalue, so that's a classical object classical variable.
+
+15:39.855 --> 15:43.040
+Next example is now a pointer to integer.
+
+15:43.041 --> 15:47.276
+And again we set the "ip", so the value
+
+15:47.277 --> 15:50.967
+at that memory location to one.
+
+15:50.968 --> 15:56.583
+What is this? It's again an lvalue.
+
+15:56.584 --> 16:01.758
+And third example integer "i" and "i = 1".
+
+16:01.759 --> 16:03.865
+Now we look at the right side
+
+16:03.866 --> 16:08.473
+and this one, the one is now an rvalue definitely.
+
+16:08.474 --> 16:14.896
+It's more specifically and pure rvalue so a prvalue.
+
+16:14.897 --> 16:17.973
+This is a literal.
+
+16:17.974 --> 16:21.410
+More interesting are the use cases,
+
+16:21.411 --> 16:24.197
+when functions are involved,
+
+16:24.198 --> 16:29.137
+especially the return type of function.
+
+16:29.138 --> 16:35.670
+So this function returns reference to float
+
+16:35.671 --> 16:43.205
+Internally it defines a local variable "f" and returns "f".
+
+16:43.206 --> 16:47.612
+Here is some warning, of course this is in general
+
+16:47.613 --> 16:50.722
+not a good idea to have a local variable
+
+16:50.723 --> 16:52.572
+and return it,
+
+16:52.573 --> 16:54.808
+because when it goes out of scope,
+
+16:54.809 --> 16:57.542
+the local variable it is cleaned up
+
+16:57.543 --> 17:01.481
+and you should not use it outside the function anymore.
+
+17:01.482 --> 17:04.624
+But in this example we will not use it,
+
+17:04.625 --> 17:05.595
+so that doesn't matter.
+
+17:05.596 --> 17:11.990
+It's just about to show you what kind of value this is.
+
+17:11.991 --> 17:16.748
+And since it is a usual reference,
+
+17:16.749 --> 17:19.581
+you can assign a value to it
+
+17:19.582 --> 17:22.366
+and that makes it an lvalue.
+
+17:22.367 --> 17:25.200
+So what we get here is an lvalue.
+
+17:25.201 --> 17:31.768
+So you can assign something to the return value.
+
+17:31.769 --> 17:37.882
+The next example is now float without reference.
+
+17:37.883 --> 17:45.601
+And here you return just a constant, so 2.
+
+17:45.602 --> 17:50.796
+As we have said 2 is a literal
+
+17:50.797 --> 17:59.030
+and what you return here is then again a pure rvalue.
+
+17:59.031 --> 18:06.861
+And the last example this is now the rvalue reference
+
+18:06.862 --> 18:11.280
+and in this case, again if you return 2.
+
+18:11.281 --> 18:17.387
+What happens? Now you get an xvalue
+
+18:17.388 --> 18:22.867
+in this rvalue reference.
+
+18:22.868 --> 18:29.191
+So these are now our examples for the different kinds
+
+18:29.192 --> 18:35.901
+of values you have in the current C++ language
+
+18:35.863 --> 18:42.128
+[Music]
+
+18:47.649 --> 18:51.209
+it goes out of scope or is deleted and
+
+18:51.210 --> 18:54.398
+the compiler here automatically destroys
+
+18:54.399 --> 18:57.908
+each member for the members of class
+
+18:57.909 --> 19:02.908
+type the corresponding destructors are
+
+19:02.909 --> 19:07.778
+invoked and for the built-in or compound
+
+19:07.779 --> 19:10.898
+types no explicit work is done to
+
+19:10.899 --> 19:16.298
+destroy them so when the object pointer
+
+19:16.299 --> 19:20.408
+to pointer member is not deleted this
+
+19:20.409 --> 19:25.648
+means you can have a memory leak and
+
+19:25.649 --> 19:29.918
+therefore basically all memory that you
+
+19:29.919 --> 19:34.399
+have dynamically allocated in the class
+
+19:34.400 --> 19:43.299
+you have also to free in the destructor
+
+19:43.300 --> 19:47.808
+that was it for the theoretical part so
+
+19:47.809 --> 19:52.159
+next we go to direct programming
+
+19:52.160 --> 19:53.160
+examples see you for the next video
